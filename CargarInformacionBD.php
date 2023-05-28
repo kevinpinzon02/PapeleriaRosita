@@ -25,9 +25,9 @@ $_tabla";
 echo "</div>";
 
 $servername = "localhost";
-$username = "kevin33";
-$password = "password";
-$dbname = "constructora";
+$username = "rosita";
+$password = "123456";
+$dbname = "papeleriarosita";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 $cantidad = 0;
 $cantidadMalos = 0;

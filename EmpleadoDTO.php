@@ -1,8 +1,7 @@
 <?php
 
-require_once('ConexionBD.php');
 
-class Empleado extends Conexion{
+class EmpleadoDTO{
 
         private $IDENTIFICACION;
         private $tipo;
@@ -21,11 +20,12 @@ class Empleado extends Conexion{
           $this->tipo = $tipo;
           $this->nombre = $nombre;
           $this->apellido = $apellido;
-          $this->edad = $edad;
           $this->rol = $rol;
-          $this->telefono = $telefono;
+          $this->edad = $edad;
           $this->estado = $estado;
+          $this->telefono = $telefono;
         }
+
         public function getIdentificacion() {
                 return $this->IDENTIFICACION;
               }
@@ -90,8 +90,7 @@ class Empleado extends Conexion{
               public function setEstado($estado) {
                 $this->estado = $estado;
               }
-              
-
+            
 }
 
 ?>

@@ -24,11 +24,9 @@ public function __construct(){
 }
 
 
-public function connect()
-{
+public function connect(){
 	return $this->conect;
 }
-
 
 }
 
