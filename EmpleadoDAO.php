@@ -1,6 +1,8 @@
 <?php
 
-include('ConexionBD.php');
+
+require_once('EmpleadoPOO.php');
+
 
 $IDENTIFICACION = $_POST['identificacion_usu'];
 $tipo = $_POST['tipo_iden_usu'];
@@ -12,11 +14,17 @@ $rol = $_POST['rol_usu'];
 $telefono = $_POST['telefono_usu'];
 $estado = $_POST['estado_usu'];
 
-try{
 
-$insertSQL= "INSERT  INTO  usuario VALUES (NULL,'".$IDENTIFICACION."',".$tipo.",'".$nombre."','".$apellido."','".$rol."',".$edad.",'".$estado."')";
+        $newusuario = new Empleado1();
 
+        $insert =  $newusuario ->insertar2($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular);
+       // $delete =  $newusuario ->eliminar(598 ,$tipo);
 
+        echo $insert;
+
+//$insertSQL= "INSERT  INTO  usuario VALUES (NULL,'".$IDENTIFICACION."',".$tipo.",'".$nombre."','".$apellido."','".$rol."',".$edad.",'".$estado."')";
+
+/*
 
 if (($result = mysqli_query($mysqli,$insertSQL)) === false) {
         echo "<br><center><li>Se encontro un erro verifica el archivo</center>";
@@ -46,12 +54,6 @@ if (($result = mysqli_query($mysqli,$insertSQL)) === false) {
                 
         }
 }
-
-}catch (Exception $e){
-        echo "Error";
-        echo "<br><center><li><a href='index.php'>VOLVER A OPCIONES</a></center>";
-    }
-
-    mysqli_close($mysqli);
+*/
 
 ?>

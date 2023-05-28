@@ -3,11 +3,15 @@
 require_once('ConexionBD.php');
 require_once('EmpleadoDTO.php');
 
+
 class Empleado1 {
+
     private $conexion;
+    private $id2;
+
 
 function __construct() {
-     
+ 
      $this->conexion =new Conexion();
      $this->conexion  =  $this->conexion ->connect() ;
 
@@ -16,6 +20,7 @@ function __construct() {
 
    public function insertar(int $ide ,int $tip,string $nom,string $ape, string $roll,int $eda,string $esta,string $cel)
   {
+   
     $id =0;
 
     $encontrar = $this->buscar($ide,$tip);
@@ -31,6 +36,7 @@ function __construct() {
      return 0;
    }else{
      $idinsert = $this->conexion -> lastInsertId();
+     $this->id2 =$idinsert;
      $id2= $idinsert;
      echo  "insertar despues: ".$id2 ." depues de la insert";
      $sql2= "INSERT INTO telefono_usuario values (?,?)";
@@ -51,6 +57,42 @@ function __construct() {
    return $ide;
 
   }
+
+  public function insertar2(int $ide ,int $tip,string $nom,string $ape, string $roll,int $eda,string $esta,string $cel)
+  {
+    include('conexion.php');
+    
+    $id =0;
+
+    $encontrar = $this->buscar($ide,$tip);
+    if($encontrar===false){
+    $newempl= new Empleado($ide,$tip,$nom,$ape,$roll,$eda,$esta,$cel);
+  $insertSQL= "INSERT  INTO  usuario VALUES (NULL,".$newempl ->getIdentificacion().",".$newempl ->getTipo().",'".$newempl ->getNombre()."','".$newempl ->getApellido()."','".$newempl ->getRol()."',".$newempl ->getEdad().",'".$newempl ->getEstado()."')";
+  echo $insertSQL;
+  if (($result = mysqli_query($mysqli,$insertSQL)) === false) {
+  echo "<br><center><li>Se encontro un erro verifica el archivo</center>";
+  echo "<br><center><li><a href='RegistrarEmpleadoVista.php'>VOLVER A OPCIONES</a></center>";
+exit();
+}else{
+    $consult= "SELECT id_usuario FROM usuario WHERE identificacion =".$newempl ->getIdentificacion();
+    $result2 = mysqli_query($mysqli,$consult);
+    $fila = mysqli_fetch_array($result2);
+    $insertSQL2= "INSERT  INTO  telefono_usuario VALUES (".$fila[0].",'".$newempl ->getTelefono()."')";
+    if (($result3 = mysqli_query($mysqli,$insertSQL2)) === false){
+
+            echo "<br><center><li>no se inserto el telefono </center>";
+                
+            echo "<br><center><li><a href='index.php'>VOLVER A OPCIONES</a></center>";
+          exit();
+    }else{  
+      echo "LOGRO";
+}
+   }
+  }else{
+    echo "ya esta el registro";
+  }
+
+  }
   
 
   public function buscar (int $ide,int $tip){
@@ -66,12 +108,19 @@ function __construct() {
   }
 
   public function eliminar (int $ide,int $tip){
-    $consult= "DELETE usuario WHERE identificacion = $ide";
-    $result2 = mysqli_query($this->conexion,$consult);
-    $fila = mysqli_fetch_array($result2);
-    $insertSQL2= "DELETE  telefono_usuario WHERE id_usuario = $fila[0]";
-    
-
+    $consult= "SELECT * FROM usuario WHERE identificacion = $ide and tipo_identificacion=$tip";
+    $result2 = $this->conexion->query($consult);
+    $ersut= $result2->fetchall(PDO::FETCH_ASSOC);
+    $idtelefenos= $ersut[0]['id_usuario'];
+    $donde= array(30);
+    echo $idtelefenos;
+    $sql = "DELETE FROM telefono_usuario where id_usuario =$idtelefenos";
+    $sql2 = "DELETE FROM usuario where id_usuario =$idtelefenos";
+    $delete = $this->conexion->prepare($sql);
+    $delete2 = $this->conexion->prepare($sql2);
+    $del = $delete->execute($donde);
+    $del2=$delete2->execute($donde);
+    return $del;
   }
 }
   ?>
