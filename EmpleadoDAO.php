@@ -50,7 +50,43 @@ function __construct() {
    return $ide;
 
   }
-  
+
+
+    public function insertar2(int $ide ,int $tip,string $nom,string $ape, string $roll,int $eda,string $esta,string $cel)
+  {
+    include('conexion.php');
+    
+    $id =0;
+
+    $encontrar = $this->buscar($ide,$tip);
+    if($encontrar===false){
+    $newempl= new EmpleadoDTO($ide,$tip,$nom,$ape,$roll,$eda,$esta,$cel);
+  $insertSQL= "INSERT  INTO  usuario VALUES (NULL,".$newempl ->getIdentificacion().",".$newempl ->getTipo().",'".$newempl ->getNombre()."','".$newempl ->getApellido()."','".$newempl ->getRol()."',".$newempl ->getEdad().",'".$newempl ->getEstado()."')";
+  echo $insertSQL;
+  if (($result = mysqli_query($mysqli,$insertSQL)) === false) {
+  echo "<br><center><li>Se encontro un erro verifica el archivo</center>";
+  echo "<br><center><li><a href='RegistrarEmpleadoVista.php'>VOLVER A OPCIONES</a></center>";
+exit();
+}else{
+    $consult= "SELECT id_usuario FROM usuario WHERE identificacion =".$newempl ->getIdentificacion();
+    $result2 = mysqli_query($mysqli,$consult);
+    $fila = mysqli_fetch_array($result2);
+    $insertSQL2= "INSERT  INTO  telefono_usuario VALUES (".$fila[0].",'".$newempl ->getTelefono()."')";
+    if (($result3 = mysqli_query($mysqli,$insertSQL2)) === false){
+
+            echo "<br><center><li>no se inserto el telefono </center>";
+                
+            echo "<br><center><li><a href='index.php'>VOLVER A OPCIONES</a></center>";
+          exit();
+    }else{  
+      echo "LOGRO";
+}
+   }
+  }else{
+    echo "ya esta el registro";
+  }
+
+  }
 
   public function buscar (int $ide,int $tip){
     $consult= "SELECT * FROM usuario WHERE identificacion =$ide and tipo_identificacion=$tip";
