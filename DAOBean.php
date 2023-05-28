@@ -16,7 +16,7 @@ if(isset($_POST['registrar_empleado'])){
 
                 $newusuario = new EmpleadoDAO();
 
-                $insert =  $newusuario ->insertar($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular);
+                $insert =  $newusuario ->insertar2($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular);
 
                 echo $insert;    
 }
