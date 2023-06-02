@@ -1,9 +1,9 @@
 <?php
 
 require_once('ConexionBD.php');
-require_once('EmpleadoDTO.php');
+require_once('ProveedorDAO.php');
 
-class EmpleadoDAO {
+class ProveedorDAO {
     private $conexion;
 
 function __construct() {
@@ -17,13 +17,17 @@ function __construct() {
    public function insertar($newempl)
   {
 
-    $encontrar = $this->buscar($newempl ->getIdentificacion(), $newempl ->getTipo());
+    $encontrar = $this->buscar($newempl ->getNit());
     if($encontrar===false){
 
           
-      $sql= "INSERT INTO usuario values (?,?,?,?,?,?,?,?)";
+      $sql= "INSERT INTO proveedor values (?,?,?,?,?,?)";
       $insert=$this->conexion->prepare($sql);
-      $data= array(0,$newempl ->getIdentificacion(), $newempl ->getTipo(),$newempl ->getNombre(), $newempl ->getApellido(), $newempl ->getRol(), $newempl ->getEdad(), $newempl ->getEstado());
+      $data= array(0,$newempl ->getNombre(), 
+      $newempl ->getDireccion(), 
+      $newempl ->getNit(), 
+      $newempl ->getAsesor(),
+      $newempl ->getEstado());
       if (($inse= $insert ->execute($data)) ===false){
           
         return 0;
@@ -31,7 +35,7 @@ function __construct() {
         $idinsert = $this->conexion -> lastInsertId();
         $id2= $idinsert;
         echo  "insertar despues: ".$id2 ." depues de la insert";
-        $sql2= "INSERT INTO telefono_usuario values (?,?)";
+        $sql2= "INSERT INTO telefono_proveedor values (?,?)";
         $insert2=$this->conexion->prepare($sql2);
         $data2= array($id2, $newempl ->getTelefono());
 
@@ -51,8 +55,8 @@ function __construct() {
   }
 
 
-  public function buscar (int $ide){
-    $consult= "SELECT * FROM usuario WHERE identificacion =$ide";
+  public function buscar (String $ide){
+    $consult= "SELECT * FROM proveedor WHERE nit = '$ide'";
     $result2 =$this->conexion->query($consult);
     $ersut= $result2->fetchall(PDO::FETCH_ASSOC);
     if (($ersut)!=null){
