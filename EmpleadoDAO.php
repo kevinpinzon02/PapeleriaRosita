@@ -10,21 +10,20 @@ function __construct() {
      
      $this->conexion =new Conexion();
      $this->conexion  =  $this->conexion ->connect() ;
+
   }
 
 
-   public function insertar(int $ide ,int $tip,string $nom,string $ape, string $roll,int $eda,string $esta,string $cel)
+   public function insertar($newempl)
   {
-    $id =0;
 
-    $encontrar = $this->buscar($ide,$tip);
+    $encontrar = $this->buscar($newempl ->getIdentificacion(), $newempl ->getTipo());
     if($encontrar===false){
-      $newempl= new EmpleadoDTO($ide,$tip,$nom,$ape,$roll,$eda,$esta,$cel);
 
           
       $sql= "INSERT INTO usuario values (?,?,?,?,?,?,?,?)";
       $insert=$this->conexion->prepare($sql);
-      $data= array($id,$newempl ->getIdentificacion(), $newempl ->getTipo(),$newempl ->getNombre(), $newempl ->getApellido(), $newempl ->getRol(), $newempl ->getEdad(), $newempl ->getEstado());
+      $data= array(0,$newempl ->getIdentificacion(), $newempl ->getTipo(),$newempl ->getNombre(), $newempl ->getApellido(), $newempl ->getRol(), $newempl ->getEdad(), $newempl ->getEstado());
       if (($inse= $insert ->execute($data)) ===false){
           
         return 0;
@@ -47,11 +46,10 @@ function __construct() {
 
     echo "ya esta el registro";
   }
-   return $ide;
+  return 1;
 
   }
-
-
+/*
     public function insertar2(int $ide ,int $tip,string $nom,string $ape, string $roll,int $eda,string $esta,string $cel)
   {
     include('conexion.php');
@@ -87,9 +85,10 @@ exit();
   }
 
   }
+  */
 
-  public function buscar (int $ide,int $tip){
-    $consult= "SELECT * FROM usuario WHERE identificacion =$ide and tipo_identificacion=$tip";
+  public function buscar (int $ide){
+    $consult= "SELECT * FROM usuario WHERE identificacion =$ide";
     $result2 =$this->conexion->query($consult);
     $ersut= $result2->fetchall(PDO::FETCH_ASSOC);
     if (($ersut)!=null){
@@ -99,14 +98,27 @@ exit();
 }
 
   }
+    public function eliminar(int $ide) {
+      $encontrar = $this->buscar($ide);
 
-  public function eliminar (int $ide,int $tip){
-    $consult= "DELETE usuario WHERE identificacion = $ide";
-    $result2 = mysqli_query($this->conexion,$consult);
-    $fila = mysqli_fetch_array($result2);
-    $insertSQL2= "DELETE  telefono_usuario WHERE id_usuario = $fila[0]";
-    
+      if($encontrar===true){
+      $eliminartelefeno = "DELETE FROM telefono_usuario WHERE id_usuario IN (SELECT id_usuario FROM usuario WHERE identificacion = $ide)";
+      $elim = $this->conexion->prepare($eliminartelefeno);
+      $eli = $elim->execute();
+
+      if($eli = $elim->execute()===false){
+      echo "no se borro";
+  }else {
+
+    $eliminartelefeno = "DELETE FROM usuario WHERE identificacion = $ide";
+      $elim = $this->conexion->prepare($eliminartelefeno);
+      $eli = $elim->execute();
 
   }
+}else{
+  echo "no se borro";
+
+}
+}
 }
   ?>
