@@ -81,6 +81,7 @@ if (isset($_POST['registrar_empleado'])) {
       //$newprovedor = new ProveedorDAO(); 
       //$insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
 
+
 }
 
 
@@ -91,5 +92,6 @@ function redirigir($mensaje){
       header("Location: $paginaPrincipal");
       exit();
 }
+
 
 ?>
