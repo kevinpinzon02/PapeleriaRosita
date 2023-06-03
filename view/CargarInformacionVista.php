@@ -3,8 +3,9 @@ session_start();
 ?>
 
 <head>
-<link rel='stylesheet' href='http://localhost/PapeleriaRosita/assetsPapeleria/estilos.css'>
-
+<style scoped>   @import url("assetsPapeleria/estilos.css"); </style>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+    <script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>
 </head>
 
 <header class="encabezado">
