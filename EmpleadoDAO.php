@@ -5,11 +5,13 @@ require_once('EmpleadoDTO.php');
 
 class EmpleadoDAO {
     private $conexion;
+    private $empleadodto;
 
 function __construct() {
      
      $this->conexion =new Conexion();
-     $this->conexion  =  $this->conexion ->connect() ;
+     $this->conexion  =  $this->conexion ->connect();
+     $this->empleadodto = new EmpleadoDTO(null,null,null,null,null,null,null,null);
 
   }
 
@@ -115,6 +117,13 @@ public function actualizar($empl) {
 }
 
 
+public function getEmpleadodto() {
+  return $this->empleadodto;
+}
+
+public function setEmpleadodto($empleadodto) {
+  $this->empleadodto = $empleadodto;
+}
 
 }
   ?>

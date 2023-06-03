@@ -19,17 +19,22 @@ if(isset($_POST['registrar_empleado'])){
         $rol = $_POST['rol_usu'];
         $estado = $_POST['estado_usu'];
 
-                // $newusuario = new EmpleadoDAO(); 
+              //  $newusuario = new EmpleadoDAO(); 
               //$insert =  $newusuario ->insertar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular));
               //$eliminar = $newusuario ->eliminar(3988,1);
               // $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular));
               // echo $insert;    
 
               
-              $newprovedor = new ProveedorDAO(); 
-              $insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
-}
+             // $newprovedor = new ProveedorDAO(); 
+            // $insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
+             //$elimiar =  $newprovedor ->eliminar("pit");
+            //$eliminar =  $newprovedor ->actualizar(NEW ProveedorDTO("kevin","653","res","pit","a","i"));
 
+
+
+
+}
 
 
 ?>
