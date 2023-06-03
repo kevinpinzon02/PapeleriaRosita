@@ -1,18 +1,27 @@
 <?php
 
 class PedidoDTO {
+    private $codigo;
     private $fechaRealizacion;
     private $fechaEsperada;
-    private $id_pedido;
     private $detallePedido;
     private $estado;
+    private $id_proveedor;
 
-    public function __construct($fechaRealizacion, $fechaEsperada, $id_pedido, $detallePedido, $estado) {
+    public function __construct($codigo,$fechaRealizacion, $fechaEsperada, $detallePedido, $estado, $id_proveedor) {
+        $this->codigo = $codigo;
         $this->fechaRealizacion = $fechaRealizacion;
         $this->fechaEsperada = $fechaEsperada;
-        $this->id_pedido = $id_pedido;
         $this->detallePedido = $detallePedido;
         $this->estado = $estado;
+        $this->id_proveedor = $id_proveedor;
+    }
+//
+    public function getCodigo() {
+        return $this->codigo;
+    }
+    public function setCodigo($codigo) {
+        $this->codigo = $codigo;
     }
 //   
     public function getFechaRealizacion() {
@@ -30,12 +39,12 @@ class PedidoDTO {
         $this->fechaEsperada = $fechaEsperada;
     }
 //    
-    public function getIdPedido() {
-        return $this->id_pedido;
+    public function getIdProveedor() {
+        return $this->id_proveedor;
     }
 
-    public function setIdPedido($id_pedido) {
-        $this->id_pedido = $id_pedido;
+    public function setIdProveedor($id_proveedor) {
+        $this->id_proveedor = $id_proveedor;
     }
 //
     public function getDetallePedido() {
