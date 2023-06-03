@@ -7,6 +7,9 @@ require_once('EmpleadoDTO.php');
 require_once('ProveedorDAO.php');
 require_once('ProveedorDTO.php');
 
+require_once('PedidoDAO.php');
+require_once('PedidoDTO.php');
+
 
 if(isset($_POST['registrar_empleado'])){
         
@@ -25,9 +28,13 @@ if(isset($_POST['registrar_empleado'])){
               // $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular));
               // echo $insert;    
 
+              //$newprovedor = new ProveedorDAO(); 
+              //$insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
+
+              $newprovedor = new PedidoDAO(); 
+              $insert =  $newprovedor ->actualizar(NEW PedidoDTO("CODIGO","2023-06-03","2023-06-03","detalle_pedido_cambio","est",1));
               
-              $newprovedor = new ProveedorDAO(); 
-              $insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
+              
 }
 
 
