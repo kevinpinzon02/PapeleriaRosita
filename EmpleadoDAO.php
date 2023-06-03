@@ -3,6 +3,7 @@
 require_once('ConexionBD.php');
 require_once('EmpleadoDTO.php');
 
+
 class EmpleadoDAO {
     private $conexion;
 
@@ -17,7 +18,7 @@ function __construct() {
    public function insertar($newempl)
   {
 
-    $encontrar = $this->buscar($newempl ->getIdentificacion(), $newempl ->getTipo());
+    $encontrar = $this->buscar($newempl ->getIdentificacion());
     if($encontrar===false){
 
           
@@ -26,27 +27,26 @@ function __construct() {
       $data= array(0,$newempl ->getIdentificacion(), $newempl ->getTipo(),$newempl ->getNombre(), $newempl ->getApellido(), $newempl ->getRol(), $newempl ->getEdad(), $newempl ->getEstado());
       if (($inse= $insert ->execute($data)) ===false){
           
-        return 0;
+        return 3;
       }else{
         $idinsert = $this->conexion -> lastInsertId();
         $id2= $idinsert;
-        echo  "insertar despues: ".$id2 ." depues de la insert";
+
         $sql2= "INSERT INTO telefono_usuario values (?,?)";
         $insert2=$this->conexion->prepare($sql2);
         $data2= array($id2, $newempl ->getTelefono());
 
-        if (($inse3= $insert2 ->execute($data2)) ===false){
-          return 0;
-        }
-
         
+        return 1;
+        if (($inse3= $insert2 ->execute($data2)) ===false){
+          return 3;
+        }
+ 
       }
 
-  }else{
-
-    echo "ya esta el registro";
-  }
-  return 1;
+    }else{
+      return 2;
+    }
 
   }
 
@@ -57,9 +57,9 @@ function __construct() {
     $ersut= $result2->fetchall(PDO::FETCH_ASSOC);
     if (($ersut)!=null){
       return true;
-}else {
-  return false;
-}
+    }else {
+      return false;
+    }
 
   }
     public function eliminar(int $ide) {
@@ -113,7 +113,6 @@ public function actualizar($empl) {
   }
 
 }
-
 
 
 }

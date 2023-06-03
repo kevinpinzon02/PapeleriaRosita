@@ -1,4 +1,6 @@
 <?php
+
+
  class Conexion {
 	private $host = "localhost";
 	private $user = "rosita";
@@ -15,7 +17,6 @@ public function __construct(){
 	try {
 		$this->conect = new PDO($conectionSti,$this->user,$this->password); 
 		$this->conect-> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-		echo "Se logro";
 	} catch (Exception $e) {
 		$this->conect ="Error de conexión";
 		echo "erroR". $e->getMessage();
