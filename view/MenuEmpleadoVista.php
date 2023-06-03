@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <head>
-    <link rel='stylesheet' href='http://localhost/PapeleriaRosita/assetsPapeleria/estilos.css'>
+      <style scoped>   @import url("assetsPapeleria/estilos.css"); </style>
 
 </head>
 

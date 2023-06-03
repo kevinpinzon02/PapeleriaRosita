@@ -1,7 +1,7 @@
 <?php
 session_start();
 echo "<head>";
-echo "<link rel='stylesheet' href='http://localhost/PapeleriaRosita/assetsPapeleria/estilos.css'>";
+echo " <link rel='stylesheet' href='http://localhost/PapeleriaRosita/view/assetsPapeleria/estilos.css'>";
 echo "</head>";
 
 echo "<header class='encabezado'>";
