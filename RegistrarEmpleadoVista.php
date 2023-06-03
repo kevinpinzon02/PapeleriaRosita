@@ -73,7 +73,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                 <input type='submit' value='Volver' class='form_boton_usu_izq'
                     onclick=this.form.action='MenuEmpleadoVista.php'>
                 </div>
-        </div>
+            <div class="text-right mb-2">
+                <a href="informes.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf"></i>Generar reportes</a>
+            </div>
     </form>
 
 </body>
