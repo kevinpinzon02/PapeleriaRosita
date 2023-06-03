@@ -1,5 +1,7 @@
 <?php
-	$mysqli=new mysqli("localhost","rosita","123456","papeleriarosita"); 
+
+	$conexion=new mysqli("localhost","rosita","123456","papeleriarosita")or die (mysqli_error()); 
+
    
 	
 	/*if(mysqli_connect_errno()){

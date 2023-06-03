@@ -49,7 +49,8 @@ function __construct() {
 
   }else{
 
-    echo "ya esta el registro";
+    /**echo "ya esta el registro";
+     * */
   }
   return 1;
 
