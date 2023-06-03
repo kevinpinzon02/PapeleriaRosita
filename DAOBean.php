@@ -8,6 +8,10 @@ require_once('EmpleadoDTO.php');
 require_once('ProveedorDAO.php');
 require_once('ProveedorDTO.php');
 
+require_once('PedidoDAO.php');
+require_once('PedidoDTO.php');
+
+
 
 
 
@@ -76,6 +80,7 @@ if (isset($_POST['registrar_empleado'])) {
 
       //$newprovedor = new ProveedorDAO(); 
       //$insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
+
 }
 
 
