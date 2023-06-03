@@ -1,7 +1,9 @@
 <?php
-
+ 
+ namespace model;
 require_once('ConexionBD.php');
-require_once('EmpleadoDTO.php');
+  
+//use model\EmpleadoDTO;
 
 
 class EmpleadoDAO {

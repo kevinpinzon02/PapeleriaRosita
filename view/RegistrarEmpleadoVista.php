@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once('ConexionBD.php');
 
 $servername = "localhost";
 $username = "rosita";
@@ -11,9 +10,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <head>
 
-    <link rel='stylesheet' href='http://localhost/PapeleriaRosita/assetsPapeleria/estilos.css'>
+<style scoped>   @import url("assetsPapeleria/estilos.css"); </style>
     <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
-    <script src='http://localhost/PapeleriaRosita/Mensajes.js'></script>
+    <script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>
 
 </head>
 
@@ -24,7 +23,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 
 <body>
-    <form action='DAOBean.php' name='form' id='form'  method='post' class='form_usu'>
+    <form action='../controller/DAOBean.php' name='form' id='form'  method='post' class='form_usu'>
         <h2 class="form_tittle_usu"> Registrar empleado</h2>
         <div class='form_container_usu'>
             <div class = 'form_campos_div'>

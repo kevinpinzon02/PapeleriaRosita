@@ -1,17 +1,22 @@
 <?php
+
 session_start();
+ 
 
+require_once('../persistence/EmpleadoDAO.php');
+require_once('../model/EmpleadoDTO.php');
 
-require_once('EmpleadoDAO.php');
-require_once('EmpleadoDTO.php');
+//use persistence\EmpleadoDAO;
+//use model\EmpleadoDTO;
 
+/*
 require_once('ProveedorDAO.php');
 require_once('ProveedorDTO.php');
 
 require_once('PedidoDAO.php');
 require_once('PedidoDTO.php');
 
-
+*/
 
 
 

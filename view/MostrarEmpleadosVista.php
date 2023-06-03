@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <head>
-    <link rel='stylesheet' href='http://localhost/PapeleriaRosita/assetsPapeleria/estilos.css'>
+<style scoped>   @import url("assetsPapeleria/estilos.css"); </style>
 
 </head>
 
@@ -13,7 +13,7 @@ Papeleria Rosita
 </header>
 
 <?php
-include 'conexion.php';
+include '../persistence/conexion.php';
 
 $cadenaSQL = "SELECT * FROM usuario";
 $resultado = mysqli_query($conexion, $cadenaSQL);
