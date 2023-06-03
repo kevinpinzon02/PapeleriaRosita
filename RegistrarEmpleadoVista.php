@@ -10,7 +10,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 ?>
 
 <head>
+
     <link rel='stylesheet' href='http://localhost/PapeleriaRosita/assetsPapeleria/estilos.css'>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+    <script src='http://localhost/PapeleriaRosita/Mensajes.js'></script>
 
 </head>
 
@@ -27,7 +30,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             <div class = 'form_campos_div'>
                 <div>
                     Identificación: 
-                    <input class='form_campos' name="identificacion_usu" type="text" autocomplete="off"/>
+                    <input class='form_campos' name="identificacion_usu" type="number" autocomplete="off" required>
                     <br><br>Tipo de<br>Identificación:
                     <select class='form_campos' name='tipo_iden_usu'>
                         <option value='seleccionar'>Seleccionar</option>
@@ -42,15 +45,15 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     </select>
                     
                     <br><br>Nombre: 
-                    <input class='form_campos' name="nombre_usu" type="text" autocomplete="off"/>
+                    <input class='form_campos' name="nombre_usu" type="text" autocomplete="off" required>
 
                     <br><br>Apellido: 
-                    <input class='form_campos' name="apellido_usu" type="text" autocomplete="off"/>
+                    <input class='form_campos' name="apellido_usu" type="text" autocomplete="off" required>
                     <br>
                 </div>
                 <div>
                     Edad: 
-                    <input class='form_campos' name="edad_usu" type="number" autocomplete="off" style="left: 600px"/>
+                    <input class='form_campos' name="edad_usu" type="number" autocomplete="off" style="left: 600px" required>
                     <br><br>Rol:
                     <select class='form_campos' name='rol_usu' style="left: 600px">
                         <option value='seleccionar'>Seleccionar</option>
@@ -58,7 +61,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                         <option value='EMPLEADO'>Empleado</option>
                     </select>
                     <br><br>Celular:
-                    <input class='form_campos' name="telefono_usu" type="number" autocomplete="off" style="left: 600px"/>
+                    <input class='form_campos' name="telefono_usu" type="number" autocomplete="off" style="left: 600px" required>
                     <br><br>Estado:
                     <select class='form_campos' name='estado_usu' style="left: 600px">
                         <option value='seleccionar'>Seleccionar</option>
@@ -70,10 +73,20 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             <br><br>
             <div class = 'form_botones_usu'>
                 <input type='submit' name='registrar_empleado' value='Registrar' class='form_boton_usu_izq'>
-                <input type='submit' value='Volver' class='form_boton_usu_izq'
-                    onclick=this.form.action='MenuEmpleadoVista.php'>
+                <input type='button' value='Volver' class='form_boton_usu_izq' 
+                    onclick="window.location.href='MenuEmpleadoVista.php'">
                 </div>
-        </div>
+            <div class="text-right mb-2">
+                <a href="informes.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf"></i>Generar reportes</a>
+            </div>
     </form>
+    <?php
+    
+    if (isset($_COOKIE['mensaje'])) {
+        $mensaje = $_COOKIE['mensaje'];
+        echo $mensaje;
+        setcookie("mensaje", "", time() - 3600, "/"); 
+    }
+?>
 
 </body>

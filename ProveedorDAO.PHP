@@ -23,7 +23,8 @@ function __construct() {
           
       $sql= "INSERT INTO proveedor values (?,?,?,?,?,?)";
       $insert=$this->conexion->prepare($sql);
-      $data= array(0,$newempl ->getNombre(), 
+      $data= array(0,
+      $newempl ->getNombre(), 
       $newempl ->getDireccion(), 
       $newempl ->getNit(), 
       $newempl ->getAsesor(),
@@ -48,7 +49,8 @@ function __construct() {
 
   }else{
 
-    echo "ya esta el registro";
+    /**echo "ya esta el registro";
+     * */
   }
   return 1;
 
@@ -66,7 +68,21 @@ function __construct() {
 }
 
   }
-    public function eliminar(String $ide) {
+
+
+  public function buscar_id (INT $ide){
+    $consult= "SELECT * FROM proveedor WHERE id_proveedor = $ide";
+    $result2 =$this->conexion->query($consult);
+    $ersut= $result2->fetchall(PDO::FETCH_ASSOC);
+    if (($ersut)!=null){
+      return true;
+}else {
+  return false;
+}
+
+  }
+    public function eliminar(int $ide) {
+
       $encontrar = $this->buscar($ide);
 
       if($encontrar===true){

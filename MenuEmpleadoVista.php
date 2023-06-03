@@ -20,7 +20,7 @@ session_start();
             <input type='submit' name='registraremp' value='Registrar Empleado' class='form_boton' onclick=this.form.action='RegistrarEmpleadoVista.php'>
             <br><br>
             <input type='submit' name='mostraremp' value='Mostrar Empleados' class='form_boton'
-                onclick=this.form.action='pagina3.php'>
+                onclick=this.form.action='MostrarEmpleadosVista.php'>
             <br><br>
             <input type='submit' name='editaremp' value='Editar Empleado' class='form_boton'
                 onclick=this.form.action='pagina3.php'>
