@@ -1,6 +1,6 @@
 <?php
  
- namespace model;
+ //namespace persistence;
 require_once('ConexionBD.php');
   
 //use model\EmpleadoDTO;

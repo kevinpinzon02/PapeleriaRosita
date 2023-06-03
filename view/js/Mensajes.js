@@ -34,4 +34,29 @@ class Mensajes{
             icon: "error",
           });  
     }
+
+    EliminarEmpleado(){
+        swal("Digite la identificación del empleado que desea eliminar: ", {
+            content: "input",
+        })
+        .then((value) => {
+            swal({
+                title: `¿Seguro que desea eliminar al empleado con identificación:${value}?`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                  swal("Se ha eliminado correctamente el empleado", {
+                    icon: "success",
+                  });
+                } else {
+                  swal("¡Has cancelado el proceso de eliminación!");
+                }
+              })
+        });
+    }
 }
+
+const clMensajes = new Mensajes();

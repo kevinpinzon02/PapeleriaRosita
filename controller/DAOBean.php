@@ -22,7 +22,6 @@ require_once('PedidoDTO.php');
 
 
 if (isset($_POST['registrar_empleado'])) {
-      echo "gonorrea";
       $IDENTIFICACION = $_POST['identificacion_usu'];
       $tipo = $_POST['tipo_iden_usu'];
       $nombre = $_POST['nombre_usu'];
@@ -79,6 +78,8 @@ if (isset($_POST['registrar_empleado'])) {
       }
 
       redirigir($mensaje);
+
+
       //$eliminar = $newusuario ->eliminar(3988);
       // $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular)); 
 
@@ -91,9 +92,8 @@ if (isset($_POST['registrar_empleado'])) {
 
 
 function redirigir($mensaje){
-      echo "aaaaaaaaaaa";
       setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
-      $paginaPrincipal = 'RegistrarEmpleadoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; // Cambia 'index.php' por la URL de tu página principal
       header("Location: $paginaPrincipal");
       exit();
 }
