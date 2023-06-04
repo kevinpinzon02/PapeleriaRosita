@@ -6,6 +6,8 @@ session_start();
 require_once('../persistence/EmpleadoDAO.php');
 require_once('../model/EmpleadoDTO.php');
 
+require_once('../persistence/conexion.php');
+
 require_once('../persistence/ProductoDAO.php');
 require_once('../model/ProductoDTO.php');
 
@@ -38,15 +40,18 @@ if (isset($_POST['iniciar_sesion'])) {
       $nombre_usuario = $_POST['nombre_usu'];
       $contrasena = $_POST['password_usu'];
 
+
       $newusuario = new EmpleadoDAO();
       $log = $newusuario->identificar($nombre_usuario, $contrasena);
       if ($log === true) {
+
 
             $_SESSION['identificacion'] = $nombre_usuario;
             $paginaPrincipal = '../view/Menu.php';
             header("Location: $paginaPrincipal");
             echo "se registro";
             exit();
+
 
       } else {
             $mensaje = "<script>
@@ -95,17 +100,25 @@ if (isset($_POST['registrar_empleado'])) {
             redirigirRegistrarEmpleado($mensaje);
       }
 
-      $newusuario = new EmpleadoDAO();
-      $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+
+     $newusuario = new EmpleadoDAO();
+     $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
       //$newprocuto = new ProductoDAO();
       //$insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
       //$eliminar =$newprocuto->eliminar("papa");
-      $idde = $nombre = $_SESSION['identificacion'];
-      $obterid = $newusuario->sacarid($idde);
-      echo "este es el id " . $obterid . " este es el id de usuario : " . $idde;
+      $productos = array();
+      $productos[] = new ProductoDTO("papa", 3698,50, 50, "jabon fea", "act",2);
+      $productos[] = new ProductoDTO("aji", 999, 11, 11, "jabon fea", "act",3);
+      $productos[] = new ProductoDTO("cepillo", 68, 99, 32, "jabon fea", "act",4);
+      $productos[] = new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",5);
+      $idde=$nombre = $_SESSION['identificacion'];
+      $obterid= $newusuario->sacarid($idde);
+      echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
       $newventa = new VentaDAO();
-      $insert = $newventa->insertar(new VentaDTO(3666, "02-04-2022", "varias venta", "act", "16563", "act", $obterid, "papa maiz huevo"));
-      //$eliminar =$newprocuto->eliminar("papa");
+      $insert = $newventa->insertar(new VentaDTO(3666, "2002-09-12", "varias venta", "act", $obterid, "1", $productos));
+     //$eliminar =$newprocuto->eliminar("papa");
+
+
       if ($insert === 1) {
             $mensaje = "<script>
                         const instancia = new Mensajes();

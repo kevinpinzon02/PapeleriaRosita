@@ -15,7 +15,7 @@ function __construct() {
      
      $this->conexion =new Conexion();
      $this->conexion  =  $this->conexion ->connect();
-     $newprocuto = new ProductoDAO();
+     
 
 
     
@@ -28,7 +28,7 @@ function __construct() {
 
     $encontrar = $this->buscar($newventa ->getCodigo());
     if($encontrar===false){
-      $sql= "INSERT INTO venta values (?,?,?,?,?,?,?,?)";
+      $sql= "INSERT INTO venta values (?,?,?,?,?,?,?)";
       $insert=$this->conexion->prepare($sql);
       $data= array(0,$newventa ->getValorVenta(), 
       $newventa ->getFechaVenta(),
@@ -39,11 +39,16 @@ function __construct() {
 
       $idinsert = $this->conexion->lastInsertId();
       $id2 = $idinsert;
-      //$producto = $this->actualizarPoructo($newventa ->getListaproductos(),$id2);
+      echo " este es el usuario: ".$newventa ->getUsuario();
+
+      
+ 
 
       if (($inse= $insert ->execute($data)) ===false){
           echo "no se logor insertar";
         return 3;
+      }else{
+        $this->actualizarPoructo($newventa ->getListaproductos(),$id2);
       }
            
     }else {
@@ -55,7 +60,15 @@ function __construct() {
   
     public function actualizarPoructo($listaproductos,$codgio){
      foreach ($listaproductos as $producto) {
-        echo "Nombre: " . $prducto->getNombreProducto() . ", Edad: " . $prducto->getCantidad() . "<br>";
+        echo "Nombre: " . $producto->getNombreProducto() . ", Edad: " . $producto->getCantidad() . "<br>";
+        $sql= "INSERT INTO venta_producto values (?,?,?)";
+        $insert=$this->conexion->prepare($sql);
+        $data= array($codgio,
+        $producto ->getCodigo(),
+        $producto ->getCantidad());
+  
+       
+        echo " este es el usuario: ". $producto ->getCodigo();
     }
 
 

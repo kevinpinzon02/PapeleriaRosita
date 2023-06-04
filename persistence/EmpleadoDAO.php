@@ -60,7 +60,9 @@ class EmpleadoDAO
   public function identificar($ide , $contraseña)
   {
     try {
+
       $consult = "SELECT * FROM usuario WHERE identificacion =$ide AND contrasenia ='$contraseña' ";
+
     $result2 = $this->conexion->query($consult);
     $ersut = $result2->fetchall(PDO::FETCH_ASSOC);
     if (($ersut) != null) {
