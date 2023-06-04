@@ -39,12 +39,18 @@ class Mensajes {
     });
   }
 
+   EliminacionEmpleadoEfectiva() {
+    swal("Se ha eliminado correctamente el empleado", {
+      icon: "success",
+    });
+  }
+  
   EliminarEmpleado() {
     swal("Digite la identificación del empleado que desea eliminar: ", {
       content: "input",
     }).then((value) => {
       swal({
-        title: `¿Seguro que desea eliminar al empleado con identificación:${value}?`,
+        title: `¿Seguro que desea eliminar al empleado con identificación: ${value}?`,
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -57,6 +63,7 @@ class Mensajes {
             success: function(response) {
               // Manejar la respuesta del servidor
               console.log(response);
+              // Llamar a la función de eliminación exitosa
             },
             error: function(xhr, status, error) {
               // Manejar el error de la solicitud
@@ -67,12 +74,6 @@ class Mensajes {
           swal("¡Has cancelado el proceso de eliminación!");
         }
       });
-    });
-  }
-
-  EliminacionEmpleadoEfectiva(){
-    swal("Se ha eliminado correctamente el empleado", {
-      icon: "success",
     });
   }
 

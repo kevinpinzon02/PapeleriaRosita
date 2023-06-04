@@ -16,7 +16,7 @@ class EmpleadoDAO
 
     $this->conexion = new Conexion();
     $this->conexion = $this->conexion->connect();
-    $this->empleadodto = new EmpleadoDTO(null, null, null, null, null, null, null, null);
+
 
   }
 
