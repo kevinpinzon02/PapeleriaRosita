@@ -207,7 +207,8 @@ tr {
   align-items: center;
 }
 
-.form_boton_usu_izq, .form_boton_usu_der {
+.form_boton_usu_izq{
+
   flex: 1;
   margin: 0 70px;
   background-color: #0CADC3;
@@ -218,6 +219,36 @@ tr {
   padding: 0.5em 0rem;
   border: none;
   border-radius: 0.5rem;
+
+}
+
+.form_boton_usu_izq:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  /* Por ejemplo: */
+  background-color: #0899ab;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form_boton_usu_der {
+  flex: 1;
+  margin: 0 70px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  font-size: 1.1rem;
+  padding: 0.5em 0rem;
+  border: 2px solid #0899ab;
+  border-radius: 0.5rem;
+
+}
+
+.form_boton_usu_der:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  background-color: #ffffff;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 /** Menu Inicial */
@@ -318,7 +349,6 @@ tr {
   position: absolute; /* Establece la posición absoluta */
   top:620px; /* Coordenada vertical desde la parte superior */
   left: 810px; /* Coordenada horizontal desde la parte izquierda */
-
 }
 
 .form_boton_menuUsu_volver:hover {
@@ -327,6 +357,42 @@ tr {
   transform: scale(1.05);
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.form_todosMenus {
+  background-color: #ffffffd2;
+  margin: 6em auto;
+  width: 80%;
+  max-width: 400px;
+  padding: 3.8em 3em 4em;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+  text-align: center;
+}
+
+.form_boton_menuPro_volver {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 250;
+  font-size: 1rem; 
+  padding: 0.5em 0.7em;
+  border: 2px solid #0899ab;
+  border-radius: 0.5rem;
+  width: 40%;
+
+  float: right;
+  margin-left: 180px;
+}
+
+.form_boton_menuPro_volver:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  background-color: #ffffff;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+
 
 
 

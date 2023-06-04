@@ -11,6 +11,18 @@ class Mensajes {
     );
   }
 
+  AgregarProveedor() {
+    swal("¡Registro exitoso!", "Se ha registrado el proveedor", "success");
+  }
+
+  ExisteProveedor() {
+    swal(
+      "El proveedor que trata de ingresar ya existe",
+      "Verifica los datos (NIT del proveedor)",
+      "error"
+    );
+  }
+
   ErrorBD() {
     swal({
       title: "Ha ocurrido un error",
@@ -46,7 +58,7 @@ class Mensajes {
 
   ErrorComboEstado() {
     swal({
-      title: "Debe seleccionar el estado del empleado",
+      title: "Debe seleccionar el estado",
       icon: "error",
     });
   }

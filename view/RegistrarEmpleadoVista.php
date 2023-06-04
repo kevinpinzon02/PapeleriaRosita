@@ -72,7 +72,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             <br><br>
             <div class = 'form_botones_usu'>
                 <input type='submit' name='registrar_empleado' value='Registrar' class='form_boton_usu_izq'>
-                <input type='button' value='Volver' class='form_boton_usu_izq' 
+                <input type='button' value='Volver' class='form_boton_usu_der' 
                     onclick="window.location.href='MenuEmpleadoVista.php'">
                 </div>
             <div class="text-right mb-2">

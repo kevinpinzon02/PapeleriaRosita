@@ -28,11 +28,13 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         <div class='form_container_usu'>
             <div class = 'form_campos_div'>
                 <div>
-
+                    Fecha de<br>realización: 
+                    <input class="form_campos" name="fechaEspera_pedido" type="date" autocomplete="off" required>
+                    <br><br>
                     Fecha esperada: 
                     <input class="form_campos" name="fechaEspera_pedido" type="date" autocomplete="off" required>
 
-                    <br><br>Seleccionar<br>Proveedor:
+                    <br><br>Proveedor:
                     <select class='form_campos' name='proveedor_pedido'>
                         <option value='seleccionar'>Seleccionar</option>
 
@@ -54,10 +56,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                         <option value='INACTIVO'>Inactivo</option>
                     </select>
 
-                    <br><br>codigo: 
+                    <br><br>Código: 
                     <input class='form_campos' style="left: 600px" name="codigo_pedido" type="text" autocomplete="off" required>
 
-                    <br><br>detalle pedido: 
+                    <br><br>Detalle<br>pedido: 
                     <input class='form_campos' style="left: 600px" name="detalle_pedido" type="text" autocomplete="off" required>
 
                 </div>
@@ -66,7 +68,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             <div class = 'form_botones_usu'>
                 <input type='submit' name='registrar_pedido' value='Registrar' class='form_boton_usu_izq'>
                 <input type='button' value='Volver' class='form_boton_usu_izq' 
-                    onclick="window.location.href='MenuEmpleadoVista.php'">
+                    onclick="window.location.href='MenuPedidoVista.php'">
                 </div>
     </form>
     <?php
