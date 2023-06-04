@@ -39,43 +39,34 @@ class Mensajes {
     });
   }
 
-   EliminacionEmpleadoEfectiva() {
+  
+  EliminacionEmpleadoEfectiva() {
     swal("Se ha eliminado correctamente el empleado", {
       icon: "success",
     });
   }
-  
+
   EliminarEmpleado() {
-    swal("Digite la identificación del empleado que desea eliminar: ", {
-      content: "input",
+    swal({
+        title: "Digite la identificación del empleado que desea eliminar:",
+        content: "input",
     }).then((value) => {
-      swal({
-        title: `¿Seguro que desea eliminar al empleado con identificación: ${value}?`,
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
-          $.ajax({
-            url: "../controller/DAOBean.php",
-            type: "POST",
-            data: { valor: value },
-            success: function(response) {
-              // Manejar la respuesta del servidor
-              console.log(response);
-              // Llamar a la función de eliminación exitosa
-            },
-            error: function(xhr, status, error) {
-              // Manejar el error de la solicitud
-              console.log(error);
-            }
-          });
+        if(value){
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "../controller/DAOBean.php", true);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          var data = "valor=" + (value);
+          xhr.send(data);
+
         } else {
+
           swal("¡Has cancelado el proceso de eliminación!");
         }
-      });
-    });
-  }
+        });
+    };
+
+
+
 
 }
 

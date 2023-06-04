@@ -76,7 +76,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     onclick="window.location.href='MenuEmpleadoVista.php'">
                 </div>
             <div class="text-right mb-2">
-                <a href="informes.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf"></i>Generar reportes</a>
+                <a href="../informes/informesventas_por_vendedor.php" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf"></i>Generar reportes</a>
             </div>
     </form>
     <?php
