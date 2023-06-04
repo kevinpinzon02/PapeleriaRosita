@@ -6,7 +6,7 @@ session_start();
 <style scoped>   @import url("assetsPapeleria/estilos.css"); </style>
     <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
     <script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E></script>
 </head>
 
 <header class="encabezado">
@@ -24,8 +24,7 @@ session_start();
             <input type='submit' name='mostraremp' value='Mostrar Empleados' class='form_boton'
                 onclick=this.form.action='MostrarEmpleadosVista.php'>
             <br><br>
-            <input type='submit' name='editaremp' value='Editar Empleado' class='form_boton'
-                onclick=this.form.action='pagina3.php'>
+            <input type='submit' name='editaremp' value='Editar Empleado' class='form_boton'>
             <br><br>
             <input type='submit' name='eliminaremp' value='Eliminar Empleado' class='form_boton'>
         </div>
@@ -35,12 +34,6 @@ session_start();
 <?php
     if (isset($_COOKIE['mensaje'])) {
         $mensaje = $_COOKIE['mensaje'];
-        echo $mensaje;
-        setcookie("mensaje", "", time() - 3600, "/"); 
-    }
-
-    elseif (isset($_COOKIE['mensaje2'])) {
-        $mensaje = $_COOKIE['mensaje2'];
         echo $mensaje;
         setcookie("mensaje", "", time() - 3600, "/"); 
     }

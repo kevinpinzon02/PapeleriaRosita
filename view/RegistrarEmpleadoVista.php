@@ -86,6 +86,12 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         echo $mensaje;
         setcookie("mensaje", "", time() - 3600, "/"); 
     }
+
+    if (isset($_COOKIE['mensaje2'])) {
+        $mensaje = $_COOKIE['mensaje2'];
+        echo $mensaje;
+        setcookie("mensaje2", "", time() - 3600, "/"); 
+    }
 ?>
 
 </body>
