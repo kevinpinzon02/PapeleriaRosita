@@ -60,7 +60,7 @@ function __construct() {
   
     public function actualizarPoructo($listaproductos,$codgio){
      foreach ($listaproductos as $producto) {
-        echo "Nombre: " . $prducto->getNombreProducto() . ", Edad: " . $prducto->getCantidad() . "<br>";
+        echo "Nombre: " . $producto->getNombreProducto() . ", Edad: " . $producto->getCantidad() . "<br>";
         $sql= "INSERT INTO venta_producto values (?,?,?)";
         $insert=$this->conexion->prepare($sql);
         $data= array($codgio,
