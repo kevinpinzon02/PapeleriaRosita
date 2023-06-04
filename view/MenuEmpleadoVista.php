@@ -4,9 +4,11 @@ session_start();
 
 <head>
 <style scoped>   @import url("assetsPapeleria/estilos.css"); </style>
+
     <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
     <script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E></script>
+
 </head>
 
 <header class="encabezado">
@@ -26,7 +28,7 @@ session_start();
             <br><br>
             <input type='submit' name='editaremp' value='Editar Empleado' class='form_boton'>
             <br><br>
-            <input type='submit' name='eliminaremp' value='Eliminar Empleado' class='form_boton'>
+            <input type='submit' name='eliminaremp' value='Eliminar Empleado' class='form_boton' onclick="console.log('Eliminar Empleado button clicked');">
         </div>
     </form>
 </body>

@@ -39,11 +39,14 @@ class Mensajes {
     });
   }
 
+
   static EliminacionEmpleadoEfectiva() {
+
     swal("Se ha eliminado correctamente el empleado", {
       icon: "success",
     });
   }
+
 
   static EliminacionEmpleadoNoEfectiva() {
     swal(
@@ -92,6 +95,7 @@ class Mensajes {
       }
     });
   }
+
 }
 
 const clMensajes = new Mensajes();

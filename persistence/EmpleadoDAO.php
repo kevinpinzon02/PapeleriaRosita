@@ -16,7 +16,7 @@ class EmpleadoDAO
 
     $this->conexion = new Conexion();
     $this->conexion = $this->conexion->connect();
-    $this->empleadodto = new EmpleadoDTO(null, null, null, null, null, null, null, null);
+
 
   }
 
@@ -53,6 +53,25 @@ class EmpleadoDAO
     } else {
       return 2;
     }
+
+  }
+
+
+  public function identificar($ide , $contraseña)
+  {
+    try {
+      $consult = "SELECT * FROM usuario WHERE usuario =$ide AND contraseña = $password ";
+    $result2 = $this->conexion->query($consult);
+    $ersut = $result2->fetchall(PDO::FETCH_ASSOC);
+    if (($ersut) != null) {
+      return true;
+    } else {
+      return false;
+    }
+    } catch (Exception $e) {
+      return  false;
+    }
+  
 
   }
 
