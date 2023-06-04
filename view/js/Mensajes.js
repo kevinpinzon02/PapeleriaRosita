@@ -32,6 +32,18 @@ class Mensajes {
     });
   }
 
+  ErrorUsuarioNoExiste() {
+    swal({
+      title: "Los datos ingresados son incorrectos",
+      text: "Verifica la información",
+      icon: "error",
+    });
+  }
+
+  Prueba2(){
+    console.log("aaaaaaa")
+  }
+
   ErrorComboEstado() {
     swal({
       title: "Debe seleccionar el estado del empleado",
@@ -39,14 +51,11 @@ class Mensajes {
     });
   }
 
-
   static EliminacionEmpleadoEfectiva() {
-
     swal("Se ha eliminado correctamente el empleado", {
       icon: "success",
     });
   }
-
 
   static EliminacionEmpleadoNoEfectiva() {
     swal(
@@ -80,11 +89,10 @@ class Mensajes {
             console.log("Respuesta del servidor: " + valor);
             if (valor === 1) {
               Mensajes.EliminacionEmpleadoEfectiva();
-            } 
+            }
             if (valor === 2) {
               Mensajes.EliminacionEmpleadoNoEfectiva();
-            }
-            else {
+            } else {
               Mensajes.ErrorBD();
             }
           }
@@ -95,7 +103,6 @@ class Mensajes {
       }
     });
   }
-
 }
 
 const clMensajes = new Mensajes();

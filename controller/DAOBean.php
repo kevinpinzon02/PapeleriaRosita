@@ -16,7 +16,7 @@ require_once('../model/VentaDTO.php');
 require_once('../persistence/conexion.php');
 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
 
-echo "<script src='js/Mensajes.js'></script>";
+echo "<script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E></script>";
 
 
@@ -41,18 +41,21 @@ if (isset($_POST['iniciar_sesion'])) {
       $newusuario = new EmpleadoDAO();
       $log = $newusuario->identificar($nombre_usuario, $contrasena);
       if ($log === true) {
-          
-              $_SESSION['identificacion'] = $nombre_usuario;
-              $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; 
-              header("Location: $paginaPrincipal");
-              echo "se registro";
-              exit();
-        
+
+            $_SESSION['identificacion'] = $nombre_usuario;
+            $paginaPrincipal = '../view/Menu.php';
+            header("Location: $paginaPrincipal");
+            echo "se registro";
+            exit();
+
       } else {
-          // Mostrar mensaje de error
-          echo 'swal("Error", "Usuario no encontrado", "error");';
+            $mensaje = "<script>
+                        const aver = new Mensajes();
+                        aver.ErrorUsuarioNoExiste();
+                        </script>";
+            redirigirUsuarioIncorrecto($mensaje);
       }
-  
+
 }
 
 if (isset($_POST['registrar_empleado'])) {
@@ -92,17 +95,17 @@ if (isset($_POST['registrar_empleado'])) {
             redirigirRegistrarEmpleado($mensaje);
       }
 
-     $newusuario = new EmpleadoDAO();
-     $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+      $newusuario = new EmpleadoDAO();
+      $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
       //$newprocuto = new ProductoDAO();
       //$insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
       //$eliminar =$newprocuto->eliminar("papa");
-      $idde=$nombre = $_SESSION['identificacion'];
-      $obterid= $newusuario->sacarid($idde);
-      echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
+      $idde = $nombre = $_SESSION['identificacion'];
+      $obterid = $newusuario->sacarid($idde);
+      echo "este es el id " . $obterid . " este es el id de usuario : " . $idde;
       $newventa = new VentaDAO();
-      $insert = $newventa->insertar(new VentaDTO(3666, "02-04-2022", "varias venta", "act", "16563", "act",$obterid,"papa maiz huevo"));
-     //$eliminar =$newprocuto->eliminar("papa");
+      $insert = $newventa->insertar(new VentaDTO(3666, "02-04-2022", "varias venta", "act", "16563", "act", $obterid, "papa maiz huevo"));
+      //$eliminar =$newprocuto->eliminar("papa");
       if ($insert === 1) {
             $mensaje = "<script>
                         const instancia = new Mensajes();
@@ -136,21 +139,25 @@ if (isset($_POST['eliminaremp'])) {
       redirigirEliminarEmpleado($mensaje);
 
 }
-  if (isset($_POST['valor'])) {
+if (isset($_POST['valor'])) {
       $valor = $_POST['valor'];
       $newusuario = new EmpleadoDAO();
       $eliminar = $newusuario->eliminar($valor);
-    
+
       $response = array('valor' => $eliminar);
-    
+
       header('Content-Type: application/json');
       echo json_encode($response);
       exit; // Terminar la ejecución del script aquí
-  }
-  
+}
 
-
-
+function redirigirUsuarioIncorrecto($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/");
+      $paginaPrincipal = '../view/index.php';
+      header("Location: $paginaPrincipal");
+      exit();
+}
 
 function redirigirRegistrarEmpleado($mensaje)
 {

@@ -39,6 +39,6 @@ session_start();
             </div>
         </div>
         <input type='submit' name='ven' value='Volver'  class='form_boton_menu_volver'
-        onclick="this.form.action='Inicio.php'">
+        onclick="this.form.action='index.php'">
     </form> 
 </body>
