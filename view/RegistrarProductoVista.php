@@ -44,7 +44,7 @@
             </div>
             <br><br>
             <div class = 'form_botones_usu'>
-                <input type='submit' name='registrar_empleado' value='Registrar' class='form_boton_usu_izq'>
+                <input type='submit' name='registrar_producto' value='Registrar' class='form_boton_usu_izq'>
                 <input type='button' value='Volver' class='form_boton_usu_izq' 
                     onclick="window.location.href='MenuEmpleadoVista.php'">
                 </div>

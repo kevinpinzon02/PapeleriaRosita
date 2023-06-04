@@ -17,29 +17,29 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 </head>
 
 <header class="encabezado">
-    Papelería Rosita - Registrar Pedido
+    Papelería Rosita - Registrar Compra
     <hr>
 </header>
 
 
 <body>
     <form action='../controller/DAOBean.php' name='form' id='form'  method='post' class='form_usu'>
-        <h2 class="form_tittle_usu"> Registrar Pedido</h2>
+        <h2 class="form_tittle_usu"> Registrar Compra</h2>
         <div class='form_container_usu'>
             <div class = 'form_campos_div'>
                 <div>
 
                     Valor de <br> la compra: 
-                    <input class="form_campos" name="fecha_esperada" type="number" autocomplete="off" required>
+                    <input class="form_campos" name="valor_compra" type="number" autocomplete="off" required>
 
                     <br><br>Fecha Compra: 
-                    <input class="form_campos" name="fecha_esperada" type="date" autocomplete="off" required>
+                    <input class="form_campos" name="fecha_compra" type="date" autocomplete="off" required>
 
                     <br><br>Cantidad Productos: 
-                    <input class="form_campos" name="fecha_esperada" type="number" autocomplete="off" required>
+                    <input class="form_campos" name="cantidad_compra" type="number" autocomplete="off" required>
 
                     Estado:
-                    <select class='form_campos' name='estado_usu' style="left: 600px">
+                    <select class='form_campos' name='estado_compra' style="left: 600px">
                         <option value='seleccionar'>Seleccionar</option>
                         <option value='ACTIVO'>Activo</option>
                         <option value='INACTIVO'>Inactivo</option>
@@ -49,13 +49,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                 </div>
                 <div>
                     detalle compra: 
-                    <input class='form_campos' style="left: 600px" name="apellido_usu" type="text" autocomplete="off" required>
-
-                    <br><br>detalle pedido: 
-                    <input class='form_campos' style="left: 600px" name="nombre_usu" type="text" autocomplete="off" required>
+                    <input class='form_campos' style="left: 600px" name="detalle_compra" type="text" autocomplete="off" required>
 
                     <br><br>Seleccionar<br>Pedido:
-                    <select class='form_campos' name='tipo_iden_usu' style="left: 600px">
+                    <select class='form_campos' name='pedido_compra' style="left: 600px">
                         <option value='seleccionar'>Seleccionar</option>
 
                     <?php 
@@ -68,7 +65,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     </select>
 
                     <br><br>Seleccionar<br>usuario:
-                    <select class='form_campos' name='tipo_iden_usu' style="left: 600px">
+                    <select class='form_campos' name='usuario_compra' style="left: 600px">
                         <option value='seleccionar'>Seleccionar</option>
 
                     <?php 
@@ -84,7 +81,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             </div>
             <br><br>
             <div class = 'form_botones_usu'>
-                <input type='submit' name='registrar_empleado' value='Registrar' class='form_boton_usu_izq'>
+                <input type='submit' name='registrar_compra' value='Registrar' class='form_boton_usu_izq'>
                 <input type='button' value='Volver' class='form_boton_usu_izq' 
                     onclick="window.location.href='MenuEmpleadoVista.php'">
                 </div>

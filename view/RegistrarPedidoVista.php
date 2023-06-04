@@ -30,10 +30,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                 <div>
 
                     Fecha esperada: 
-                    <input class="form_campos" name="fecha_esperada" type="date" autocomplete="off" required>
+                    <input class="form_campos" name="fechaEspera_pedido" type="date" autocomplete="off" required>
 
                     <br><br>Seleccionar<br>Proveedor:
-                    <select class='form_campos' name='tipo_iden_usu'>
+                    <select class='form_campos' name='proveedor_pedido'>
                         <option value='seleccionar'>Seleccionar</option>
 
                     <?php 
@@ -48,23 +48,23 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                 </div>
                 <div>
                     Estado:
-                    <select class='form_campos' name='estado_usu' style="left: 600px">
+                    <select class='form_campos' name='estado_pedido' style="left: 600px">
                         <option value='seleccionar'>Seleccionar</option>
                         <option value='ACTIVO'>Activo</option>
                         <option value='INACTIVO'>Inactivo</option>
                     </select>
 
                     <br><br>codigo: 
-                    <input class='form_campos' style="left: 600px" name="apellido_usu" type="text" autocomplete="off" required>
+                    <input class='form_campos' style="left: 600px" name="codigo_pedido" type="text" autocomplete="off" required>
 
                     <br><br>detalle pedido: 
-                    <input class='form_campos' style="left: 600px" name="nombre_usu" type="text" autocomplete="off" required>
+                    <input class='form_campos' style="left: 600px" name="detalle_pedido" type="text" autocomplete="off" required>
 
                 </div>
             </div>
             <br><br>
             <div class = 'form_botones_usu'>
-                <input type='submit' name='registrar_empleado' value='Registrar' class='form_boton_usu_izq'>
+                <input type='submit' name='registrar_pedido' value='Registrar' class='form_boton_usu_izq'>
                 <input type='button' value='Volver' class='form_boton_usu_izq' 
                     onclick="window.location.href='MenuEmpleadoVista.php'">
                 </div>
