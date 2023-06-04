@@ -29,8 +29,36 @@ require_once('PedidoDAO.php');
 require_once('PedidoDTO.php');
 
 */
-$eliminar = 0;
-$jotagay = 0;
+
+
+if (isset($_POST['iniciar_sesion'])) {
+      $nombre_usuario = $_POST['nombre_usu'];
+      $contrasena = $_POST['password_usu'];
+  
+      $sql = "SELECT * FROM usuario WHERE nombre = '$nombre_usuario'";
+      $result = mysqli_query($conn, $sql);
+  
+      //echo "" .$result
+      if (mysqli_num_rows($result) == 1) {
+          $row = mysqli_fetch_assoc($result);
+  
+          if ($contrasena == $hashed_password=$row['contrasenia']) {
+              $_SESSION['nombre'] = $nombre_usuario;
+              $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; 
+              header("Location: $paginaPrincipal");
+              echo "se registro";
+              exit();
+          } else {
+              // Mostrar mensaje de error
+              echo 'swal("Error", "Contraseña incorrecta", "error");';
+          }
+      } else {
+          // Mostrar mensaje de error
+          echo 'swal("Error", "Usuario no encontrado", "error");';
+      }
+  }
+
+
 if (isset($_POST['registrar_empleado'])) {
       $IDENTIFICACION = $_POST['identificacion_usu'];
       $tipo = $_POST['tipo_iden_usu'];
