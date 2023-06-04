@@ -97,11 +97,16 @@ if (isset($_POST['registrar_empleado'])) {
       //$newprocuto = new ProductoDAO();
       //$insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
       //$eliminar =$newprocuto->eliminar("papa");
+      $productos = array();
+      $productos[] = new ProductoDTO("papa", 3698,50, 50, "jabon fea", "act",2);
+      $productos[] = new ProductoDTO("aji", 999, 11, 11, "jabon fea", "act",3);
+      $productos[] = new ProductoDTO("cepillo", 68, 99, 32, "jabon fea", "act",4);
+      $productos[] = new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",5);
       $idde=$nombre = $_SESSION['identificacion'];
       $obterid= $newusuario->sacarid($idde);
       echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
       $newventa = new VentaDAO();
-      $insert = $newventa->insertar(new VentaDTO(3666, "02-04-2022", "varias venta", "act", "16563", "act",$obterid,"papa maiz huevo"));
+      $insert = $newventa->insertar(new VentaDTO(3666, "2002-09-12", "varias venta", "act", $obterid, "1", $productos));
      //$eliminar =$newprocuto->eliminar("papa");
       if ($insert === 1) {
             $mensaje = "<script>
