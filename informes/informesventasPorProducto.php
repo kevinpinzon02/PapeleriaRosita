@@ -75,7 +75,7 @@ function crear($IDproducto)
    $pdf->SetDrawColor(163, 163, 163); //colorBorde
    $IDproducto = 4;
 
-   $consulta_reporte_alquiler = $mysqli->query("SELECT venta.id_venta,venta.valor_venta , venta.fecha_venta ,venta.detalle_venta ,venta.estado , producto.nombre_producto AS nombre_producto, usuario.nombre AS nombre_usuario
+   $consulta_reporte_alquiler = $conexion->query("SELECT venta.id_venta,venta.valor_venta , venta.fecha_venta ,venta.detalle_venta ,venta.estado , producto.nombre_producto AS nombre_producto, usuario.nombre AS nombre_usuario
 FROM venta
 JOIN venta_producto ON venta.id_venta = venta_producto.id_venta
 JOIN producto ON venta_producto.id_producto = producto.id_producto
