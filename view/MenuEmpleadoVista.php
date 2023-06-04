@@ -28,7 +28,12 @@ session_start();
             <br><br>
             <input type='submit' name='editaremp' value='Editar Empleado' class='form_boton'>
             <br><br>
-            <input type='submit' name='eliminaremp' value='Eliminar Empleado' class='form_boton' onclick="console.log('Eliminar Empleado button clicked');">
+            <input type='submit' name='eliminaremp' value='Eliminar Empleado' class='form_boton'>
+            <br><br>
+            <input type='submit' name='asigUsu' value='Asignar Usuario' class='form_boton'>
+            <br><br>
+            <input type='submit' name='vol_menu_usu' value='Volver' class = 'form_boton_menuUsu_volver'
+            onclick=this.form.action='Menu.php'>
         </div>
     </form>
 </body>

@@ -32,14 +32,17 @@ header {
 
 .form {
   background-color: #ffffffd2;
-  margin: auto;
+  margin: 6em auto;
   width: 90%;
   max-width: 400px;
-  padding: 4.5em 3em;
+  padding: 3.8em 3em 6em;
   border-radius: 10px;
   box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
   text-align: center;
 }
+
+
+
 
 .form_tittle {
   font-size: 2rem;
@@ -51,6 +54,7 @@ header {
   display:grid;
   gap: 0.2em;
 }
+
 
 .form_combo {
   width: 100%;
@@ -197,3 +201,114 @@ tr {
   border: none;
   border-radius: 0.5rem;
 }
+
+/** Menu Inicial */
+.form_menu {
+  background-color: #ffffff;
+  margin: auto;
+  width: 80%;
+  height: 75%;
+  padding: 3em 3em;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+}
+
+.form_container_menu {
+  display: flex;
+  justify-content: center; /* Alinear los botones horizontalmente al centro */
+}
+
+.form_campos_div_menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_botones_menu {
+  background-color: #0CADC3;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 250;
+  font-size: 1.3rem; /* Ajusta el tamaño de fuente según tus necesidades */
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.5rem;
+  width: 90%; /* Utiliza el ancho completo del contenedor */
+  margin-bottom: 0.5em; /* Espacio entre los botones */
+}
+
+.form_botones_menu:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  /* Por ejemplo: */
+  background-color: #0899ab;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form_container_menu > div {
+  flex: 1; /* Ocupar la mitad del contenedor */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Alinear los botones verticalmente al centro */
+  justify-content: center; /* Alinear los botones horizontalmente al centro */
+}
+
+.form_container_menu > div:first-child {
+  align-self: flex-start; /* Alinear los elementos de la mitad izquierda arriba */
+}
+
+.form_boton_menu_volver {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 250;
+  font-size: 1.2rem; 
+  padding: 0.5em 0.7em;
+  border: 2px solid #0899ab;
+  border-radius: 0.5rem;
+  width: 10%; 
+  position: absolute; /* Establece la posición absoluta */
+  top:530px; /* Coordenada vertical desde la parte superior */
+  left: 1150px; /* Coordenada horizontal desde la parte izquierda */
+
+}
+
+.form_boton_menu_volver:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  background-color: #ffffff;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form_boton:hover {
+
+  background-color: #0899ab;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.form_boton_menuUsu_volver {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 250;
+  font-size: 1rem; 
+  padding: 0.5em 0.7em;
+  border: 2px solid #0899ab;
+  border-radius: 0.5rem;
+  width: 8%; 
+  position: absolute; /* Establece la posición absoluta */
+  top:620px; /* Coordenada vertical desde la parte superior */
+  left: 810px; /* Coordenada horizontal desde la parte izquierda */
+
+}
+
+.form_boton_menuUsu_volver:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  background-color: #ffffff;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+
