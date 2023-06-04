@@ -6,6 +6,8 @@ session_start();
 require_once('../persistence/EmpleadoDAO.php');
 require_once('../model/EmpleadoDTO.php');
 
+require_once('../persistence/conexion.php');
+
 require_once('../persistence/ProductoDAO.php');
 require_once('../model/ProductoDTO.php');
 
@@ -38,11 +40,13 @@ if (isset($_POST['iniciar_sesion'])) {
       $nombre_usuario = $_POST['nombre_usu'];
       $contrasena = $_POST['password_usu'];
 
+
       $newusuario = new EmpleadoDAO();
       $log = $newusuario->identificar($nombre_usuario, $contrasena);
       if ($log === true) {
           
               $_SESSION['identificacion'] = $nombre_usuario;
+
               $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; 
               header("Location: $paginaPrincipal");
               echo "se registro";
@@ -92,6 +96,7 @@ if (isset($_POST['registrar_empleado'])) {
             redirigirRegistrarEmpleado($mensaje);
       }
 
+
      $newusuario = new EmpleadoDAO();
      $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
       //$newprocuto = new ProductoDAO();
@@ -103,6 +108,7 @@ if (isset($_POST['registrar_empleado'])) {
       $newventa = new VentaDAO();
       $insert = $newventa->insertar(new VentaDTO(3666, "02-04-2022", "varias venta", "act", "16563", "act",$obterid,"papa maiz huevo"));
      //$eliminar =$newprocuto->eliminar("papa");
+
       if ($insert === 1) {
             $mensaje = "<script>
                         const instancia = new Mensajes();

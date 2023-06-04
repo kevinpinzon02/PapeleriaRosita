@@ -29,24 +29,15 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             <div class = 'form_campos_div'>
                 <div>
 
-                    Fecha esperada: 
+                    Valor de <br> la compra: 
+                    <input class="form_campos" name="fecha_esperada" type="number" autocomplete="off" required>
+
+                    <br><br>Fecha Compra: 
                     <input class="form_campos" name="fecha_esperada" type="date" autocomplete="off" required>
 
-                    <br><br>Seleccionar<br>Proveedor:
-                    <select class='form_campos' name='tipo_iden_usu'>
-                        <option value='seleccionar'>Seleccionar</option>
+                    <br><br>Cantidad Productos: 
+                    <input class="form_campos" name="fecha_esperada" type="number" autocomplete="off" required>
 
-                    <?php 
-                    $getTipoID = "select * from proveedor order by id_proveedor";
-                    $getTipoID2 = mysqli_query($conn,$getTipoID) or die(mysqli_error($conn));
-
-                    foreach ($getTipoID2 as $opciones): ?>
-                        <option value ="<?php echo $opciones['id_proveedor'] ?>"><?php echo $opciones['nombre'] ?></option>
-                    <?php endforeach ?>
-                    </select>
-
-                </div>
-                <div>
                     Estado:
                     <select class='form_campos' name='estado_usu' style="left: 600px">
                         <option value='seleccionar'>Seleccionar</option>
@@ -54,11 +45,40 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                         <option value='INACTIVO'>Inactivo</option>
                     </select>
 
-                    <br><br>codigo: 
+
+                </div>
+                <div>
+                    detalle compra: 
                     <input class='form_campos' style="left: 600px" name="apellido_usu" type="text" autocomplete="off" required>
 
                     <br><br>detalle pedido: 
                     <input class='form_campos' style="left: 600px" name="nombre_usu" type="text" autocomplete="off" required>
+
+                    <br><br>Seleccionar<br>Pedido:
+                    <select class='form_campos' name='tipo_iden_usu' style="left: 600px">
+                        <option value='seleccionar'>Seleccionar</option>
+
+                    <?php 
+                    $getTipoID = "select * from pedido order by id_pedido";
+                    $getTipoID2 = mysqli_query($conn,$getTipoID) or die(mysqli_error($conn));
+
+                    foreach ($getTipoID2 as $opciones): ?>
+                        <option value ="<?php echo $opciones['id_pedido'] ?>"><?php echo $opciones['codigo'] ?></option>
+                    <?php endforeach ?>
+                    </select>
+
+                    <br><br>Seleccionar<br>usuario:
+                    <select class='form_campos' name='tipo_iden_usu' style="left: 600px">
+                        <option value='seleccionar'>Seleccionar</option>
+
+                    <?php 
+                    $getTipoID = "select * from usuario order by id_usuario";
+                    $getTipoID2 = mysqli_query($conn,$getTipoID) or die(mysqli_error($conn));
+
+                    foreach ($getTipoID2 as $opciones): ?>
+                        <option value ="<?php echo $opciones['id_usuario'] ?>"><?php echo $opciones['nombre'] ?></option>
+                    <?php endforeach ?>
+                    </select>
 
                 </div>
             </div>

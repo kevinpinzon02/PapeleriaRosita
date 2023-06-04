@@ -29,8 +29,14 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
             <div class = 'form_campos_div'>
                 <div>
 
-                    Fecha esperada: 
+                    Valor venta: 
+                    <input class="form_campos" name="fecha_esperada" type="number" autocomplete="off" required>
+
+                    <br><br>Fecha venta: 
                     <input class="form_campos" name="fecha_esperada" type="date" autocomplete="off" required>
+
+                    <br><br>Detalle venta: 
+                    <input class="form_campos" name="fecha_esperada" type="text" autocomplete="off" required>
 
                     <br><br>Seleccionar<br>Proveedor:
                     <select class='form_campos' name='tipo_iden_usu'>
@@ -44,6 +50,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                         <option value ="<?php echo $opciones['id_proveedor'] ?>"><?php echo $opciones['nombre'] ?></option>
                     <?php endforeach ?>
                     </select>
+
+                    
 
                 </div>
                 <div>
@@ -59,6 +67,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
                     <br><br>detalle pedido: 
                     <input class='form_campos' style="left: 600px" name="nombre_usu" type="text" autocomplete="off" required>
+
+                    
 
                 </div>
             </div>
