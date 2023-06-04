@@ -19,26 +19,31 @@ session_start();
 
 <body>
     <form name='formME' id='formME' method='post' class='form_menu'>
-    <h2 class="form_tittle_usu">¡Escoge el modulo!</h2>
-    <br><br><br>
+        <h2 class="form_tittle_usu">¡Escoge el modulo!</h2>
+        <br><br><br>
         <div class='form_container_menu'>
             <div class='form_campos_div_menu'>
                 <input type='submit' name='emp' value='Empleado / Usuario' class='form_botones_menu'
                     onclick="this.form.action='MenuEmpleadoVista.php'">
                 <br><br>
-                <input type='submit' name='prov' value='Proveedor' class='form_botones_menu'>
+                <input type='submit' name='prov' value='Proveedor' class='form_botones_menu'
+                    onclick="this.form.action='MenuProveedorVista.php'">
                 <br><br>
-                <input type='submit' name='ped' value='Pedido' class='form_botones_menu'>
+                <input type='submit' name='ped' value='Pedido' class='form_botones_menu'
+                    onclick="this.form.action='MenuPedidoVista.php'">
             </div>
             <div class='form_campos_div_menu'>
-                <input type='submit' name='prod' value='Producto' class='form_botones_menu'>
+                <input type='submit' name='prod' value='Producto' class='form_botones_menu'
+                    onclick="this.form.action='MenuProductoVista.php'">
                 <br><br>
-                <input type='submit' name='com' value='Compra' class='form_botones_menu'>
+                <input type='submit' name='com' value='Compra' class='form_botones_menu'
+                    onclick="this.form.action='MenuCompraVista.php'">
                 <br><br>
-                <input type='submit' name='ven' value='Venta' class='form_botones_menu'>
+                <input type='submit' name='ven' value='Venta' class='form_botones_menu'
+                    onclick="this.form.action='MenuVentaVista.php'">
             </div>
         </div>
-        <input type='submit' name='ven' value='Volver'  class='form_boton_menu_volver'
-        onclick="this.form.action='index.php'">
-    </form> 
+        <input type='submit' name='ven' value='Volver' class='form_boton_menu_volver'
+            onclick="this.form.action='index.php'">
+    </form>
 </body>

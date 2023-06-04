@@ -6,6 +6,9 @@ session_start();
 require_once('../persistence/EmpleadoDAO.php');
 require_once('../model/EmpleadoDTO.php');
 
+require_once('../persistence/ProveedorDAO.php');
+require_once('../model/ProveedorDTO.php');
+
 require_once('../persistence/conexion.php');
 
 require_once('../persistence/ProductoDAO.php');
@@ -26,10 +29,9 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min
 //use persistence\EmpleadoDAO;
 //use model\EmpleadoDTO;
 
-/*
-require_once('ProveedorDAO.php');
-require_once('ProveedorDTO.php');
 
+
+/*
 require_once('PedidoDAO.php');
 require_once('PedidoDTO.php');
 
@@ -101,23 +103,8 @@ if (isset($_POST['registrar_empleado'])) {
       }
 
 
-     $newusuario = new EmpleadoDAO();
-     $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
-      //$newprocuto = new ProductoDAO();
-      //$insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
-      //$eliminar =$newprocuto->eliminar("papa");
-      $productos = array();
-      $productos[] = new ProductoDTO("papa", 3698,50, 50, "jabon fea", "act",2);
-      $productos[] = new ProductoDTO("aji", 999, 11, 11, "jabon fea", "act",3);
-      $productos[] = new ProductoDTO("cepillo", 68, 99, 32, "jabon fea", "act",4);
-      $productos[] = new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",5);
-      $idde=$nombre = $_SESSION['identificacion'];
-      $obterid= $newusuario->sacarid($idde);
-      echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
-      $newventa = new VentaDAO();
-      $insert = $newventa->insertar(new VentaDTO(3666, "2002-09-12", "varias venta", "act", $obterid, "1", $productos));
-     //$eliminar =$newprocuto->eliminar("papa");
-
+      $newusuario = new EmpleadoDAO();
+      $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
 
       if ($insert === 1) {
             $mensaje = "<script>
@@ -137,9 +124,53 @@ if (isset($_POST['registrar_empleado'])) {
 
 
       redirigirRegistrarEmpleado($mensaje);
-      // $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular)); 
-      //$newprovedor = new ProveedorDAO(); 
-      //$insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
+
+}
+
+// $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular)); 
+
+/** --------------- REGISTRAR PROVEEDOR ---------------------------- */
+if (isset($_POST['registrar_proveedor'])) {
+
+      $nombre = $_POST['nombre_prov'];
+      $telefono = $_POST['telefono_prov'];
+      $direccion = $_POST['direccion_prov'];
+      $nit = $_POST['nit_prov'];
+      $asesor = $_POST['asesor_prov'];
+      $estado = $_POST['estado_prov'];
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+            redirigirRegistrarProveedor($mensaje);
+      }
+
+
+      $newprovedor = new ProveedorDAO();
+      $insert = $newprovedor->insertar(new ProveedorDTO($nombre, $telefono, $direccion, $nit, $asesor, $estado));
+
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarProveedor();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExisteProveedor();
+                        </script>";
+
+      }
+
+      redirigirRegistrarProveedor($mensaje);
+
 }
 
 if (isset($_POST['eliminaremp'])) {
@@ -164,6 +195,13 @@ if (isset($_POST['valor'])) {
       exit; // Terminar la ejecución del script aquí
 }
 
+
+
+
+
+
+/**------------------------------------REDIRIGIR------------------------------------ */
+
 function redirigirUsuarioIncorrecto($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/");
@@ -179,6 +217,16 @@ function redirigirRegistrarEmpleado($mensaje)
       header("Location: $paginaPrincipal");
       exit();
 }
+
+function redirigirRegistrarProveedor($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarProveedorVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+
 
 function redirigirEliminarEmpleado($mensaje)
 {
