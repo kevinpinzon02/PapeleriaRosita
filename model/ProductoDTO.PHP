@@ -1,5 +1,6 @@
 <?php
 
+
 class ProductoDTO {
     private $nombreProducto;
     private $valorCompra;
