@@ -6,14 +6,17 @@ session_start();
 require_once('../persistence/EmpleadoDAO.php');
 require_once('../model/EmpleadoDTO.php');
 
-
-
 require_once('../persistence/ProductoDAO.php');
 require_once('../model/ProductoDTO.php');
 
+require_once('../persistence/VentaDAO.php');
+require_once('../model/VentaDTO.php');
+
+
+require_once('../persistence/conexion.php');
 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
 
-echo "<script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>";
+echo "<script src='js/Mensajes.js'></script>";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E></script>";
 
 
@@ -34,30 +37,23 @@ require_once('PedidoDTO.php');
 if (isset($_POST['iniciar_sesion'])) {
       $nombre_usuario = $_POST['nombre_usu'];
       $contrasena = $_POST['password_usu'];
-  
-      $sql = "SELECT * FROM usuario WHERE nombre = '$nombre_usuario'";
-      $result = mysqli_query($conn, $sql);
-  
-      //echo "" .$result
-      if (mysqli_num_rows($result) == 1) {
-          $row = mysqli_fetch_assoc($result);
-  
-          if ($contrasena == $hashed_password=$row['contrasenia']) {
-              $_SESSION['nombre'] = $nombre_usuario;
+
+      $newusuario = new EmpleadoDAO();
+      $log = $newusuario->identificar($nombre_usuario, $contrasena);
+      if ($log === true) {
+          
+              $_SESSION['identificacion'] = $nombre_usuario;
               $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; 
               header("Location: $paginaPrincipal");
               echo "se registro";
               exit();
-          } else {
-              // Mostrar mensaje de error
-              echo 'swal("Error", "Contraseña incorrecta", "error");';
-          }
+        
       } else {
           // Mostrar mensaje de error
           echo 'swal("Error", "Usuario no encontrado", "error");';
       }
-  }
-
+  
+}
 
 if (isset($_POST['registrar_empleado'])) {
       $IDENTIFICACION = $_POST['identificacion_usu'];
@@ -98,9 +94,15 @@ if (isset($_POST['registrar_empleado'])) {
 
      $newusuario = new EmpleadoDAO();
      $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
-      $newprocuto = new ProductoDAO();
-      $insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
-      // $eliminar =$newprocuto->eliminar("papa");
+      //$newprocuto = new ProductoDAO();
+      //$insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
+      //$eliminar =$newprocuto->eliminar("papa");
+      $idde=$nombre = $_SESSION['identificacion'];
+      $obterid= $newusuario->sacarid($idde);
+      echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
+      $newventa = new VentaDAO();
+      $insert = $newventa->insertar(new VentaDTO(3666, "02-04-2022", "varias venta", "act", "16563", "act",$obterid,"papa maiz huevo"));
+     //$eliminar =$newprocuto->eliminar("papa");
       if ($insert === 1) {
             $mensaje = "<script>
                         const instancia = new Mensajes();
@@ -146,6 +148,8 @@ if (isset($_POST['eliminaremp'])) {
       exit; // Terminar la ejecución del script aquí
   }
   
+
+
 
 
 function redirigirRegistrarEmpleado($mensaje)

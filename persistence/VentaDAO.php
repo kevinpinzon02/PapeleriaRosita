@@ -2,6 +2,7 @@
  //namespace persistence;
 
 require_once('ConexionBD.php');
+require_once('ProductoDAO.php');
   
 //use model\EmpleadoDTO;
 
@@ -14,42 +15,58 @@ function __construct() {
      
      $this->conexion =new Conexion();
      $this->conexion  =  $this->conexion ->connect();
+     $newprocuto = new ProductoDAO();
+
+
     
 
   }
 
 
-   public function insertar($newproc)
+   public function insertar($newventa)
   {
 
-    $encontrar = $this->buscar($newproc ->getNombreProducto());
+    $encontrar = $this->buscar($newventa ->getCodigo());
     if($encontrar===false){
-
-          
-      $sql= "INSERT INTO producto values (?,?,?,?,?,?,?,?)";
+      $sql= "INSERT INTO venta values (?,?,?,?,?,?,?,?)";
       $insert=$this->conexion->prepare($sql);
-      $data= array(0,$newproc ->getNombreProducto(), 
-      $newproc ->getValorCompra(),
-      $newproc ->getValorVenta(),
-      $newproc ->getCantidad(),
-      $newproc ->getDetalleProducto(),
-      $newproc ->getEstado(),
-      $newproc ->getCodigo());
+      $data= array(0,$newventa ->getValorVenta(), 
+      $newventa ->getFechaVenta(),
+      $newventa ->getDetalleVenta(),
+      $newventa ->getEstado(),
+      $newventa ->getUsuario(),
+      $newventa ->getCodigo());
+
+      $idinsert = $this->conexion->lastInsertId();
+      $id2 = $idinsert;
+      //$producto = $this->actualizarPoructo($newventa ->getListaproductos(),$id2);
+
       if (($inse= $insert ->execute($data)) ===false){
-          
+          echo "no se logor insertar";
         return 3;
-      }else {
+      }
+           
+    }else {
         echo "no se pudo";
       }
 
+   
     }
-    
+  
+    public function actualizarPoructo($listaproductos,$codgio){
+     foreach ($listaproductos as $producto) {
+        echo "Nombre: " . $prducto->getNombreProducto() . ", Edad: " . $prducto->getCantidad() . "<br>";
     }
+
+
+
+    } 
+   
 
 
 
   public function buscar ($ide){
-    $consult= "SELECT * FROM producto WHERE nombre_producto = '$ide'";
+    $consult= "SELECT * FROM venta WHERE codigo_venta = '$ide'";
     $result2 =$this->conexion->query($consult);
     $ersut= $result2->fetchall(PDO::FETCH_ASSOC);
     if (($ersut)!=null){
