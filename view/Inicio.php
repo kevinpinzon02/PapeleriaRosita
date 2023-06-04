@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "rosita";
-$password = "123456";
-$dbname = "papeleriarosita";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 ?>
 
 <head>
@@ -34,7 +29,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <br><br>
                     contraseña:
                     <br>
-                    <input class='form_campos' name="password_usu" type="text" autocomplete="off" required>
+                    <input class='form_campos' name="password_usu" type="password" autocomplete="off" required>
                     <br>
                 </div>
             </div>
