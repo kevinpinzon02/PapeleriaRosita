@@ -53,7 +53,7 @@ class VentaDTO {
         return $this->usuario;
     }
 
-    public function setUsuario(usuario) {
+    public function setUsuario($usuario) {
         $this->usuario = $usuario;
     }
 

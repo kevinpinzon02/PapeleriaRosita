@@ -6,7 +6,7 @@ session_start();
 require_once('../persistence/EmpleadoDAO.php');
 require_once('../model/EmpleadoDTO.php');
 
-
+require_once('../persistence/conexion.php');
 
 require_once('../persistence/ProductoDAO.php');
 require_once('../model/ProductoDTO.php');
@@ -36,7 +36,7 @@ if (isset($_POST['iniciar_sesion'])) {
       $contrasena = $_POST['password_usu'];
   
       $sql = "SELECT * FROM usuario WHERE nombre = '$nombre_usuario'";
-      $result = mysqli_query($conn, $sql);
+      $result = mysqli_query($conexion, $sql);
   
       //echo "" .$result
       if (mysqli_num_rows($result) == 1) {
@@ -96,8 +96,8 @@ if (isset($_POST['registrar_empleado'])) {
             redirigirRegistrarEmpleado($mensaje);
       }
 
-     $newusuario = new EmpleadoDAO();
-     $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+      $newusuario = new EmpleadoDAO();
+      $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
       $newprocuto = new ProductoDAO();
       $insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
       // $eliminar =$newprocuto->eliminar("papa");
