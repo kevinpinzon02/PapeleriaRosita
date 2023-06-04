@@ -8,8 +8,9 @@ class ProductoDTO {
     private $cantidad;
     private $detalleProducto;
     private $estado;
+    private $codgio;
 
-    public function __construct($nombreProducto, $valorCompra, $valorVenta, $cantidad, $detalleProducto, $estado) {
+    public function __construct($nombreProducto, $valorCompra, $valorVenta, $cantidad, $detalleProducto, $estado,$codgio) {
         
         $this->nombreProducto = $nombreProducto;
         $this->valorCompra = $valorCompra;
@@ -17,6 +18,7 @@ class ProductoDTO {
         $this->cantidad = $cantidad;
         $this->detalleProducto = $detalleProducto;
         $this->estado = $estado;
+        $this->codgio = $codgio;
     }
 //
     public function getNombreProducto() {
@@ -65,6 +67,14 @@ class ProductoDTO {
   
     public function setEstado($estado) {
         $this->estado = $estado;
+    }
+
+    public function getCodigo() {
+        return $this->codgio;
+    }
+  
+    public function setCodigo($codgio) {
+        $this->codgio = $codgio;
     }
 }
 
