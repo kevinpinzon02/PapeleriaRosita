@@ -57,6 +57,25 @@ class EmpleadoDAO
   }
 
 
+  public function identificar($ide , $contraseña)
+  {
+    try {
+      $consult = "SELECT * FROM usuario WHERE usuario =$ide AND contraseña = $password ";
+    $result2 = $this->conexion->query($consult);
+    $ersut = $result2->fetchall(PDO::FETCH_ASSOC);
+    if (($ersut) != null) {
+      return true;
+    } else {
+      return false;
+    }
+    } catch (Exception $e) {
+      return  false;
+    }
+  
+
+  }
+
+
   public function buscar(int $ide)
   {
     $consult = "SELECT * FROM usuario WHERE identificacion =$ide";

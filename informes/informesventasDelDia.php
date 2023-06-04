@@ -1,7 +1,7 @@
 <?php
 
-require_once('fpdf/fpdf.php');
-require_once('conexion.php');
+require_once('../fpdf/fpdf.php');
+require('../persistence/conexion.php');
 
 class PDF extends FPDF
 {
@@ -19,36 +19,12 @@ class PDF extends FPDF
       $this->Ln(3); // Salto de línea
       $this->SetTextColor(103); //color
 
-      /* UBICACION */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(96, 10, utf8_decode("Ubicación : "), 0, 0, '', 0);
-      $this->Ln(5);
-
-      /* TELEFONO */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(59, 10, utf8_decode("Teléfono : "), 0, 0, '', 0);
-      $this->Ln(5);
-
-      /* COREEO */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(85, 10, utf8_decode("Correo : "), 0, 0, '', 0);
-      $this->Ln(5);
-
-      /* TELEFONO */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(85, 10, utf8_decode("Sucursal : "), 0, 0, '', 0);
-      $this->Ln(10);
-
       /* TITULO DE LA TABLA */
       //color
       $this->SetTextColor(228, 100, 0);
       $this->Cell(50); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE USUARIOAS"), 0, 1, 'C', 0);
+      $this->Cell(100, 10, utf8_decode("REPORTE DE VENTAS DEL DIA"), 0, 1, 'C', 0);
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
@@ -57,13 +33,12 @@ class PDF extends FPDF
       $this->SetTextColor(255, 255, 255); //colorTexto
       $this->SetDrawColor(163, 163, 163); //colorBorde
       $this->SetFont('Arial', 'B', 11);
+
       $this->Cell(10, 10, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('IDENTIFICACION'), 1, 0, 'C', 1);
-      $this->Cell(20, 10, utf8_decode('NOMBRE'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('APELLIDO'), 1, 0, 'C', 1);
-      $this->Cell(40, 10, utf8_decode('ROL'), 1, 0, 'C', 1);
-      $this->Cell(20, 10, utf8_decode('EDAD'), 1, 0, 'C', 1);
-      $this->Cell(20, 10, utf8_decode('ESTADO'), 1, 1, 'C', 1);
+      $this->Cell(25, 10, utf8_decode('ESTADO'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('VALOR VENTA'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('FECHA VENTA'), 1, 0, 'C', 1);
+      $this->Cell(50, 10, utf8_decode('DETALLE VENTA'), 1, 1, 'C', 1);
    }
 
    // Pie de página
@@ -91,22 +66,29 @@ $pdf->AddPage(); /* aqui entran dos para parametros (horientazion,tamaño)V->por
 $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 
 $i = 0;
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('Arial', '', 10);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
-$consulta_reporte_alquiler = $mysqli->query("  select *from usuario  ");
+$consulta_reporte_alquiler = $conexion->query("select id_venta,estado, valor_venta,fecha_venta,detalle_venta
+from venta where fecha_venta = CURDATE();");
 
-while ($row = $consulta_reporte_alquiler->fetch_assoc()) {      
-  
+
+while ($row = $consulta_reporte_alquiler->fetch_assoc()) {  
+$texto = $row['detalle_venta'];
+$texto2 = strlen($texto);
+if($texto2>55){
+   $alto2 = 5; 
+   $alto = 10;
+}else {
+   $alto2 = 5;
+   $alto = 5;}  
 $i = $i + 1;
 /* TABLA */
-        $pdf->Cell(10,10,$row['id_usuario'],1,0,'C',0);
-        $pdf->Cell(40,10,$row['identificacion'],1,0,'C',0);
-        $pdf->Cell(20,10,$row['nombre'],1,0,'C',0);
-        $pdf->Cell(40,10,$row['apellido'],1,0,'C',0);
-        $pdf->Cell(40,10,$row['rol'],1,0,'C',0);
-        $pdf->Cell(20,10,$row['edad'],1,0,'C',0);
-        $pdf->Cell(20,10,$row['estado'],1,1,'C',0);
+         $pdf->Cell(10,$alto,$row['id_venta'],1,0,'C',0);
+         $pdf->Cell(25,$alto,$row['estado'],1,0,'C',0);
+         $pdf->Cell(30,$alto,$row['valor_venta'],1,0,'C',0);
+         $pdf->Cell(30,$alto,$row['fecha_venta'],1,0,'C',0);
+         $pdf->Cell(50,$alto,$row['detalle_venta'],1,1,'C',0);
 
 }
 $pdf->Output();//nombreDescarga, Visor(I->visualizar - D->descargar)

@@ -12,7 +12,7 @@ require_once('../persistence/ProductoDAO.php');
 require_once('../model/ProductoDTO.php');
 
 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
-echo "<script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>";
+echo "<script src='js/Mensajes.js'></script>";
 
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E</script>";
 
@@ -94,30 +94,33 @@ if (isset($_POST['registrar_empleado'])) {
 
 if (isset($_POST['eliminaremp'])) {
       $mensaje = "<script>
-        const instancia = new Mensajes();
-        instancia.EliminarEmpleado();
-      </script>";
-    
+                  const instancia = new Mensajes();
+                  instancia.EliminarEmpleado();
+                  </script>";
+
       redirigirEliminarEmpleado($mensaje);
-    }
-    
-    if (isset($_POST['valor'])) {
-      $newusuario = new EmpleadoDAO();
+
+
       $valor = $_POST['valor'];
+      $newusuario = new EmpleadoDAO();
       $eliminar = $newusuario->eliminar($valor);
+      echo "Eliminar es()".$valor;
+
     
-      if ($eliminar === 1) {
-        echo "la conchaklsdfmdskolmfsklx";
-    
-       $mensaje= "<script>
-          const instancia = new Mensajes();
-          instancia.EliminacionEmpleadoEfectiva();
-        </script>";
-    
-        redirigirEliminarEmpleado2( $mensaje);       
-      }
 }
 
+if ($eliminar === 1) {
+      echo "Se ha presionado un botón en SweetAlert. Valor: " . $valor;
+      echo "la conchaklsdfmdskolmfsklx";
+
+      $mensaje2 = "<script>
+                  const instancia = new Mensajes();
+                  instancia.EliminacionEmpleadoEfectiva();
+                </script>";
+
+                redirigirEliminarEmpleado2($mensaje2);
+
+}
 
 
 
@@ -142,7 +145,7 @@ function redirigirEliminarEmpleado2($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/");
       $paginaPrincipal = '../view/MenuEmpleadoVista.php';
-      ob_clean(); // Limpiar cualquier salida en búfer
+     // ob_clean(); // Limpiar cualquier salida en búfer
       header("Location: $paginaPrincipal");
       exit();
 }
