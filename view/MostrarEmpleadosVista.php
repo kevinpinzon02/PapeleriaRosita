@@ -17,31 +17,32 @@ include '../persistence/conexion.php';
 
 $cadenaSQL = "SELECT * FROM usuario";
 $resultado = mysqli_query($conexion, $cadenaSQL);
-echo "<div class = 'container'>";
-echo "<div class = 'table_wraper'>";
-echo "<table align='center' class='table'>";
-echo "<thead>";
-echo "<tr>";
-echo "<th>Identificación</th>";
-echo "<th>Tipo de identificación</th>";
-echo "<th>Nombre</th>";
-echo "<th>Apellido</th>";
-echo "<th>Rol</th>";
-echo "<th>Edad</th>";
-echo "<th>Estado</th>";
-echo "</tr>";
-echo "</thead>";
-echo "<tbody>";
-
+?>
+<div class = 'container'>
+<div class = 'table_wraper'>
+<table align='center' class='table'>
+<thead>
+<tr>
+<th>Identificación</th>
+<th>Tipo de identificación</th>
+<th>Nombre</th>
+<th>Apellido</th>
+<th>Rol</th>
+<th>Edad</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<?php
 while ($fila = mysqli_fetch_array($resultado)) {
 
     print("<tr><td>$fila[1]</td><td>$fila[2]</td><td>$fila[3]</td><td>$fila[4]</td><td>$fila[5]</td><td>$fila[6]</td><td>$fila[7]</td></tr>");
 }
-echo "</tbody>";
-echo "</table>";
-echo "</div>";
-echo "<br><center><a href='MenuEmpleadoVista.php'>Volver</a></center>";
-
-echo "</div>";
-echo "</body>";
 ?>
+</tbody>
+</table>
+</div>
+<br><center><a href='MenuEmpleadoVista.php'>Volver</a></center>
+
+</div>
+</body>
