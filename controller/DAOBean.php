@@ -12,9 +12,11 @@ require_once('../persistence/ProductoDAO.php');
 require_once('../model/ProductoDTO.php');
 
 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
-echo "<script src='js/Mensajes.js'></script>";
 
-echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E</script>";
+echo "<script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>";
+echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E></script>";
+
+
 
 //use persistence\EmpleadoDAO;
 //use model\EmpleadoDTO;
@@ -27,6 +29,7 @@ require_once('PedidoDAO.php');
 require_once('PedidoDTO.php');
 
 */
+
 
 if (isset($_POST['iniciar_sesion'])) {
       $nombre_usuario = $_POST['nombre_usu'];
@@ -54,6 +57,7 @@ if (isset($_POST['iniciar_sesion'])) {
           echo 'swal("Error", "Usuario no encontrado", "error");';
       }
   }
+
 
 if (isset($_POST['registrar_empleado'])) {
       $IDENTIFICACION = $_POST['identificacion_usu'];
@@ -113,6 +117,7 @@ if (isset($_POST['registrar_empleado'])) {
 
       }
 
+
       redirigirRegistrarEmpleado($mensaje);
       // $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular)); 
       //$newprovedor = new ProveedorDAO(); 
@@ -120,6 +125,7 @@ if (isset($_POST['registrar_empleado'])) {
 }
 
 if (isset($_POST['eliminaremp'])) {
+
       $mensaje = "<script>
                   const instancia = new Mensajes();
                   instancia.EliminarEmpleado();
@@ -127,29 +133,19 @@ if (isset($_POST['eliminaremp'])) {
 
       redirigirEliminarEmpleado($mensaje);
 
-
+}
+  if (isset($_POST['valor'])) {
       $valor = $_POST['valor'];
       $newusuario = new EmpleadoDAO();
       $eliminar = $newusuario->eliminar($valor);
-      echo "Eliminar es()".$valor;
-
     
-}
-
-if ($eliminar === 1) {
-      echo "Se ha presionado un botón en SweetAlert. Valor: " . $valor;
-      echo "la conchaklsdfmdskolmfsklx";
-
-      $mensaje2 = "<script>
-                  const instancia = new Mensajes();
-                  instancia.EliminacionEmpleadoEfectiva();
-                </script>";
-
-                redirigirEliminarEmpleado2($mensaje2);
-
-}
-
-
+      $response = array('valor' => $eliminar);
+    
+      header('Content-Type: application/json');
+      echo json_encode($response);
+      exit; // Terminar la ejecución del script aquí
+  }
+  
 
 
 function redirigirRegistrarEmpleado($mensaje)
@@ -164,15 +160,6 @@ function redirigirEliminarEmpleado($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/");
       $paginaPrincipal = '../view/MenuEmpleadoVista.php';
-      header("Location: $paginaPrincipal");
-      exit();
-}
-
-function redirigirEliminarEmpleado2($mensaje)
-{
-      setcookie("mensaje", $mensaje, time() + 3600, "/");
-      $paginaPrincipal = '../view/MenuEmpleadoVista.php';
-     // ob_clean(); // Limpiar cualquier salida en búfer
       header("Location: $paginaPrincipal");
       exit();
 }
