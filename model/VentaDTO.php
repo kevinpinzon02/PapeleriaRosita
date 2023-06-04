@@ -5,16 +5,19 @@ class VentaDTO {
     private $fechaVenta;
     private $detalleVenta;
     private $estado;
-    private $listaproductos;
+    private $codigo;
     private $usuario;
+    private $listaproductos;
 
-    public function __construct($valorVenta, $fechaVenta, $detalleVenta, $estado, $usuario) {
+    public function __construct($valorVenta, $fechaVenta, $detalleVenta, $estado, $usuario,$codigo,$listaproductos) {
         
         $this->valorVenta = $valorVenta;
         $this->fechaVenta = $fechaVenta;
         $this->detalleVenta = $detalleVenta;
         $this->estado = $estado;
+        $this->codigo = $codigo;
         $this->usuario = $usuario;
+        $this->listaproductos = $listaproductos;
     }
 //
     public function getValorVenta() {
@@ -55,6 +58,24 @@ class VentaDTO {
 
     public function setUsuario($usuario) {
         $this->usuario = $usuario;
+    }
+
+
+    public function getCodigo() {
+        return $this->codigo;
+    }
+  
+    public function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+
+    
+    public function getListaproductos() {
+        return $this->listaproductos;
+    }
+  
+    public function setListaproductos($listaproductos) {
+        $this->listaproductos = $listaproductos;
     }
 
 }
