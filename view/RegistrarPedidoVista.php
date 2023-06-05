@@ -23,16 +23,16 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 
 <body>
-    <form action='../controller/DAOBean.php' name='form' id='form'  method='post' class='form_usu'>
+    <form action='../controller/DAOBean.php' name='form' id='form'  method='post' class='form_usu' >
         <h2 class="form_tittle_usu"> Registrar Pedido</h2>
         <div class='form_container_usu'>
             <div class = 'form_campos_div'>
                 <div>
                     Fecha de<br>realización: 
-                    <input class="form_campos" name="fechaEspera_pedido" type="date" autocomplete="off" required>
+                    <input class="form_campos" name="fechaRealizada_pedido" type="date" autocomplete="off" required placeholder="YYYY-MM-DD">
                     <br><br>
                     Fecha esperada: 
-                    <input class="form_campos" name="fechaEspera_pedido" type="date" autocomplete="off" required>
+                    <input class="form_campos" name="fechaEspera_pedido" type="date" autocomplete="off" required placeholder="YYYY-MM-DD">
 
                     <br><br>Proveedor:
                     <select class='form_campos' name='proveedor_pedido'>

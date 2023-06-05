@@ -9,6 +9,9 @@ require_once('../model/EmpleadoDTO.php');
 require_once('../persistence/ProveedorDAO.php');
 require_once('../model/ProveedorDTO.php');
 
+require_once('../persistence/PedidoDAO.php');
+require_once('../model/PedidoDTO.php');
+
 require_once('../persistence/conexion.php');
 
 require_once('../persistence/ProductoDAO.php');
@@ -127,6 +130,95 @@ if (isset($_POST['registrar_empleado'])) {
 
 }
 
+/** --------------- REGISTRAR PRODUCTO ---------------------------- */
+if (isset($_POST['registrar_producto'])) {
+
+      $nombre = $_POST['nombre_prod'];
+      $valorC = $_POST['valorC_prod'];
+      $valorV = $_POST['valorV_prod'];
+      $cantidad = $_POST['cantidad_prod'];
+      $detalle = $_POST['detalle_prod'];
+      $estado = $_POST['estado_prod'];
+      $codigo = $_POST['codigo_prod'];
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+                  redirigirRegistrarProducto($mensaje);
+      }
+
+
+      $newpedido = new ProductoDAO();
+      $insert = $newpedido->insertar(new ProductoDTO($nombre,$valorC,$valorV,$cantidad,$detalle,$estado,$codigo));
+
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarProducto();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExisteProducto();
+                        </script>";
+
+      }
+
+      redirigirRegistrarProducto($mensaje);
+
+}
+
+/** --------------- REGISTRAR PEDIDO ---------------------------- */
+if (isset($_POST['registrar_pedido'])) {
+
+      $fechaR = $_POST['fechaRealizada_pedido'];
+      $fechaE = $_POST['fechaEspera_pedido'];
+      $proveedor = $_POST['proveedor_pedido'];
+      $estado = $_POST['estado_pedido'];
+      $codigo = $_POST['codigo_pedido'];
+      $detalle = $_POST['detalle_pedido'];
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+            redirigirRegistrarPedido($mensaje);
+      }
+
+
+      $newpedido = new PedidoDAO();
+      $insert = $newpedido->insertar(new PedidoDTO($codigo,$fechaR,$fechaE,$detalle,$estado,$proveedor));
+
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarPedido();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExistePedido();
+                        </script>";
+
+      }
+
+      redirigirRegistrarPedido($mensaje);
+
+}
+
 // $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular)); 
 
 /** --------------- REGISTRAR PROVEEDOR ---------------------------- */
@@ -226,7 +318,21 @@ function redirigirRegistrarProveedor($mensaje)
       exit();
 }
 
+function redirigirRegistrarPedido($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarPedidoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
 
+function redirigirRegistrarProducto($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarProductoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
 
 function redirigirEliminarEmpleado($mensaje)
 {

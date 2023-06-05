@@ -23,6 +23,9 @@
                     
                     <br><br>Valor compra: 
                     <input class='form_campos' name="valorC_prod" type="number" autocomplete="off" required>
+                    
+                    <br><br>Codigo: 
+                    <input class='form_campos' name="codigo_prod" type="text" autocomplete="off" required>
 
                     <br><br>Valor venta: 
                     <input class='form_campos' name="valorV_prod" type="number" autocomplete="off" required>
