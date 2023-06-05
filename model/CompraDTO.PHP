@@ -4,21 +4,24 @@
 
     private $valorCompra;
     private $fechaCompra;
-    private $id_pedido;
+    private $pedido;
     private $detalleCompra;
     private $estado;
-    private $id_usuario;
+    private $usuario;
+    private $listarproducto;
 
-    function __construct($valorCompra,$fechaCompra,$id_pedido,$detalleCompra,$estado,$id_usuario)
+    private $codigo;
+
+    function __construct($valorCompra,$fechaCompra,$pedido,$detalleCompra,$estado,$usuario,$codigo,$listarproducto)
     {
         $this->valorCompra = $valorCompra;
         $this->fechaCompra = $fechaCompra;
-        $this->id_pedido = $id_pedido;
+        $this->pedido = $pedido;
         $this->detalleCompra = $detalleCompra;
         $this->estado = $estado;
-        $this->id_usuario = $id_usuario;
-        $this->estado = $estado;
-        $this->estado = $estado;
+        $this->usuario = $usuario;
+        $this->codigo = $codigo;
+        $this->listarproducto = $listarproducto;
     }
 //
     public function getValorCompra() {
@@ -37,12 +40,12 @@
         $this->fechaCompra = $fechaCompra;
     }
 //
-    public function getIdPedido() {
-        return $this->id_pedido;
+    public function getPedido() {
+        return $this->pedido;
     }
 
-    public function setIdPedido($id_pedido) {
-        $this->id_pedido = $id_pedido;
+    public function setPedido($pedido) {
+        $this->pedido = $pedido;
     }
     
 //
@@ -62,12 +65,27 @@
         $this->estado = $estado;
     }
 //
-    public function getIdUsuario() {
-        return $this->id_usuario;
+    public function getUsuario() {
+        return $this->usuario;
     }
 
-    public function setIdUsuario($id_usuario) {
-        $this->id_usuario = $id_usuario;
+    public function setUsuario($usuario) {
+        $this->usuario = $usuario;
+    }
+    public function getCodigo() {
+        return $this->codigo;
+    }
+
+    public function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+
+    public function getListarproducto() {
+        return $this->listarproducto;
+    }
+
+    public function setListarproducto($listarproducto) {
+        $this->listarproducto = $listarproducto;
     }
 }
 

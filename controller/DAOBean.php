@@ -20,6 +20,10 @@ require_once('../model/ProductoDTO.php');
 require_once('../persistence/VentaDAO.php');
 require_once('../model/VentaDTO.php');
 
+require_once('../persistence/CompraDAO.php');
+require_once('../model/CompraDTO.php');
+
+
 
 require_once('../persistence/conexion.php');
 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
@@ -106,8 +110,36 @@ if (isset($_POST['registrar_empleado'])) {
       }
 
 
-      $newusuario = new EmpleadoDAO();
-      $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+     $newusuario = new EmpleadoDAO();
+     $insert = $newusuario->insertar(new EmpleadoDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+      //$newprocuto = new ProductoDAO();
+      //$insert2 = $newprocuto->actualizar(new ProductoDTO("pasta", 99, 99, 1199, "jabon fea", "act",17));
+      //$eliminar =$newprocuto->eliminar("papa");
+       //compra///
+       
+      $newcompra = new CompraDAO();
+      $insert2 = $newcompra->insertar(new CompraDTO(3666, "2002-09-12", 1, "detalle compra", "act",$obterid , $productos,"45"));
+
+      //VENTA//
+      /*
+      $productos = array();
+      $productos[] = new ProductoDTO("papa", 3698,50, 6, "jabon fea", "act",2);
+      $productos[] = new ProductoDTO("aji", 999, 11, 5, "jabon fea", "act",3);
+      $productos[] = new ProductoDTO("cepillo", 68, 99, 0, "jabon fea", "act",4);
+      $productos[] = new ProductoDTO("pasta", 99, 99, 9, "jabon fea", "act",5);
+      $idde=$nombre = $_SESSION['identificacion'];
+      $obterid= $newusuario->sacarid($idde);
+      echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
+      $newventa = new VentaDAO();
+      $insert = $newventa->insertar(new VentaDTO(3666, "2002-09-12", "varias venta", "act", $obterid, "23", $productos));
+      */
+      // $newventa = new VentaDAO();
+      //$insert = $newventa->eliminar(23);
+
+ 
+
+
+
 
       if ($insert === 1) {
             $mensaje = "<script>
