@@ -174,6 +174,7 @@ class ProveedorDTO {
      *
      * @param string $estado Estado del proveedor
      */
+    
     public function setEstado($estado) {
         $this->estado = $estado;
     }

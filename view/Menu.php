@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * Script para seleccionar una seccion
+ * 
+ * Este script se encarga de mostar el menu principal
+ * 
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
+
 session_start();
 ?>
 

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Script para registrar un pedido
+ * 
+ * Este script se encarga de establecer la conexión con la base de datos y procesar el formulario
+ * para registrar un pedido
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 
 $servername = "localhost";
