@@ -73,7 +73,31 @@ class EmpleadoDAO
     } catch (Exception $e) {
       return false;
     }
+  }
 
+  public function asignarContraseña($ide, $contraseña)
+  {
+
+    $numero = 0;
+    $encontrar = $this->buscar($ide);
+    if ($encontrar === true) {
+
+      $consult = "UPDATE usuario SET contrasenia = '$contraseña' WHERE identificacion = $ide";
+      $result2 = $this->conexion->query($consult);
+      $ersut = $result2->fetchall(PDO::FETCH_ASSOC);
+      if (($ersut) != null) {
+
+      } else {
+       
+      }
+
+      $numero = 1;
+      
+    } else {
+      $numero = 2;
+    }
+
+    return $numero;
 
   }
 

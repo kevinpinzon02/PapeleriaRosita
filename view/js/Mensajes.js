@@ -11,6 +11,18 @@ class Mensajes {
     );
   }
 
+  AsignarContraseña() {
+    swal("¡Asignación exitosa!", "Se ha asignado un usuario al empleado", "success");
+  }
+
+  NoExisteUsuario() {
+    swal(
+      "El empleado que trata de ingresar no existe",
+      "Verifica los datos",
+      "error"
+    );
+  }
+
   AgregarProveedor() {
     swal("¡Registro exitoso!", "Se ha registrado el proveedor", "success");
   }
