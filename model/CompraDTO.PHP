@@ -9,16 +9,21 @@
     private $estado;
     private $id_usuario;
 
-    function __construct($valorCompra,$fechaCompra,$id_pedido,$detalleCompra,$estado,$id_usuario)
+    private $codigo;
+
+    private $listaproducto;
+
+    function __construct($valorCompra,$fechaCompra,$id_pedido,$detalleCompra,$estado,$id_usuario,$codigo,$listaproducto)
     {
         $this->valorCompra = $valorCompra;
         $this->fechaCompra = $fechaCompra;
         $this->id_pedido = $id_pedido;
         $this->detalleCompra = $detalleCompra;
-        $this->estado = $estado;
         $this->id_usuario = $id_usuario;
         $this->estado = $estado;
-        $this->estado = $estado;
+        $this->codigo = $codigo;
+        $this->listaproducto = $listaproducto;
+       
     }
 //
     public function getValorCompra() {
@@ -68,6 +73,22 @@
 
     public function setIdUsuario($id_usuario) {
         $this->id_usuario = $id_usuario;
+    }
+
+    public function getCodigo() {
+        return $this->codigo;
+    }
+
+    public function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+
+    public function getListaProducto() {
+        return $this->listaproducto;
+    }
+
+    public function setListaProducto($listaproducto) {
+        $this->listaproducto = $listaproducto;
     }
 }
 

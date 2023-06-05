@@ -2,11 +2,17 @@
 
 require_once('../fpdf/fpdf.php');
 
-
+/**
+ * Clase PDF que extiende de FPDF.
+ * Se utiliza para generar un reporte de ventas por vendedor en formato PDF.
+ */
 class PDF extends FPDF
 {
 
-   // Cabecera de página
+   /**
+    * Función para crear la cabecera de la página.
+    * Se agrega un logo, título y campos de la tabla.
+    */
    function Header()
    {
 
@@ -20,7 +26,6 @@ class PDF extends FPDF
       $this->SetTextColor(103); //color
 
       /* TITULO DE LA TABLA */
-      //color
       $this->SetTextColor(228, 100, 0);
       $this->Cell(50); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
@@ -28,7 +33,6 @@ class PDF extends FPDF
       $this->Ln(7);
 
       /* CAMPOS DE LA TABLA */
-      //color
       $this->SetFillColor(228, 100, 0); //colorFondo
       $this->SetTextColor(255, 255, 255); //colorTexto
       $this->SetDrawColor(163, 163, 163); //colorBorde
@@ -42,7 +46,10 @@ class PDF extends FPDF
       $this->Cell(50, 10, utf8_decode('DETALLE VENTA'), 1, 1, 'C', 1);
    }
 
-   // Pie de página
+   /**
+    * Función para crear el pie de página.
+    * Se muestra el número de página y la fecha.
+    */
    function Footer()
    {
       $this->SetY(-15); // Posición: a 1,5 cm del final
@@ -56,12 +63,11 @@ class PDF extends FPDF
    }
 }
 
-//include '../../recursos/Recurso_conexion_bd.php';
-//require '../../funciones/CortarCadena.php';
-/* CONSULTA INFORMACION DEL HOSPEDAJE */
-//$consulta_info = $mysqli->query(" select *from usuario ");
-//$dato_info = $consulta_info->fetch_object();
-
+/**
+ * Función para crear el reporte de ventas por vendedor.
+ *
+ * @param int $IDVendedor ID del vendedor para filtrar las ventas.
+ */
 function crear($IDVendedor)
 {
 

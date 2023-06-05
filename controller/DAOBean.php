@@ -123,7 +123,7 @@ if (isset($_POST['registrar_venta'])) {
       $cantidades = $_POST['cantidad_producto'];
 
 
-    for ($i = 0; $i < count($productosSeleccionados); $i++) {
+      for ($i = 0; $i < count($productosSeleccionados); $i++) {
       $productoSeleccionado = $productosSeleccionados[$i];
       $cantidad = $cantidades[$i];
 
@@ -190,7 +190,7 @@ if (isset($_POST['registrar_compra'])) {
       $estado = $_POST['estado_compra'];
       $detalle = $_POST['detalle_compra'];
       $pedido = $_POST['pedido_compra'];
-      $usuario = $_POST['usuario_compra'];
+     
 
       if ($pedido == 'seleccionar') {
             $mensaje = "<script>
@@ -201,7 +201,7 @@ if (isset($_POST['registrar_compra'])) {
             redirigirRegistrarEmpleado($mensaje);
       }
 
-      if ($usuario == 'seleccionar') {
+      if ($cantidadC == 'seleccionar') {
             $mensaje = "<script>
                         const instancia = new Mensajes();
                         instancia.ErrorComboRol();
@@ -219,9 +219,32 @@ if (isset($_POST['registrar_compra'])) {
             redirigirRegistrarEmpleado($mensaje);
       }
 
+      $productosArray = array();
+      $productosSeleccionados = $_POST['seleccion_producto'];
+      $cantidades = $_POST['cantidad_producto'];
 
+
+      for ($i = 0; $i < count($productosSeleccionados); $i++) {
+      $productoSeleccionado = $productosSeleccionados[$i];
+      $cantidad = $cantidades[$i];
+
+      // Crear un arreglo asociativo con el producto y la cantidad
+      $producto = array(
+          'id_producto' => $productoSeleccionado,
+          'cantidad' => $cantidad
+      );
+
+      // Agregar el producto al arreglo principal
+      $productosArray[] = $producto;
+  }
+
+      $newusuario = new EmpleadoDAO();
+      $nombre = $_SESSION['identificacion'];
+      $idde= $nombre;
+      $obterid= $newusuario->sacarid($idde);
+      echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
       $newcompra = new CompraDAO();
-      $insert = $newcompra->insertar(new CompraDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+      $insert = $newcompra->insertar(new CompraDTO( $valorC,$fechaC , 1,  $detalle,   $estado, $obterid, $cantidadC,$productosArray));
 
       if ($insert === 1) {
             $mensaje = "<script>
