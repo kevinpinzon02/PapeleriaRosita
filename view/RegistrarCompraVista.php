@@ -38,7 +38,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <br><br>Cantidad Productos: 
                     <input class="form_campos" name="cantidad_compra" type="number" autocomplete="off" required>
 
-                    Estado:
+                    <br><br>Estado:
                     <select class='form_campos' name='estado_compra'>
                         <option value='seleccionar'>Seleccionar</option>
                         <option value='ACTIVO'>Activo</option>

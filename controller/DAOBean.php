@@ -12,6 +12,9 @@ require_once('../model/ProveedorDTO.php');
 require_once('../persistence/PedidoDAO.php');
 require_once('../model/PedidoDTO.php');
 
+require_once('../persistence/CompraDAO.php');
+require_once('../model/CompraDTO.php');
+
 require_once('../persistence/conexion.php');
 
 require_once('../persistence/ProductoDAO.php');
@@ -100,6 +103,70 @@ if (isset($_POST['asignar_usuario'])) {
 
        redirigirAsignarContraseña($mensaje);
 
+
+}
+
+/** ---------------------------------- REGISTRAR COMPRA --------------------------------- */
+
+if (isset($_POST['registrar_compra'])) {
+
+      $valorC = $_POST['valor_compra'];
+      $fechaC = $_POST['fecha_compra'];
+      $cantidadC = $_POST['cantidad_compra'];
+      $estado = $_POST['estado_compra'];
+      $detalle = $_POST['detalle_compra'];
+      $pedido = $_POST['pedido_compra'];
+      $usuario = $_POST['usuario_compra'];
+
+      if ($pedido == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboTI();
+                        </script>";
+
+            redirigirRegistrarEmpleado($mensaje);
+      }
+
+      if ($usuario == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboRol();
+                        </script>";
+
+            redirigirRegistrarEmpleado($mensaje);
+      }
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+            redirigirRegistrarEmpleado($mensaje);
+      }
+
+
+      $newcompra = new CompraDAO();
+      $insert = $newcompra->insertar(new CompraDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarEmpleado();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExisteEmpleado();
+                        </script>";
+
+      }
+
+
+      redirigirRegistrarEmpleado($mensaje);
 
 }
 
