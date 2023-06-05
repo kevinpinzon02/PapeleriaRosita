@@ -24,9 +24,7 @@ session_start();
             <input type='submit' name='registrarprovee' value='Registrar Proveedor' class='form_boton' onclick=this.form.action='RegistrarProveedorVista.php'>
             <br><br>
             <input type='submit' name='mostrarprovee' value='Mostrar Proveedores' class='form_boton'
-                onclick=this.form.action='MostrarEmpleadosVista.php'>
-            <br><br>
-            <input type='submit' name='editarprovee' value='Editar Proveedor' class='form_boton'>
+                onclick=this.form.action='MostrarProveedorVista.php'>
             <br><br>
             <input type='submit' name='eliminarprovee' value='Eliminar Proveedor' class='form_boton'>
             <br><br>

@@ -71,7 +71,7 @@ $i = 0;
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
-$consulta_reporte_alquiler = $conexion->query("select * from producto WHERE CANTIDAD > 5");
+$consulta_reporte_alquiler = $conexion->query("select * from producto WHERE CANTIDAD < 5");
 
 
 while ($row = $consulta_reporte_alquiler->fetch_assoc()) {  

@@ -62,13 +62,20 @@ class PedidoDAO
 
   public function eliminar(int $ide)
   {
+    $number=0;
     $encontrar = $this->buscar($ide);
 
-    $eliminarpedido = "DELETE FROM pedido WHERE id_pedido = $ide";
+    if ($encontrar === true) {
+    $eliminarpedido = "DELETE FROM pedido WHERE codigo = '$ide'";
     $elim = $this->conexion->prepare($eliminarpedido);
     $eli = $elim->execute();
-
+    $number = 1;
     echo "se borro";
+    
+    } else {
+      $number = 2;
+    }
+    return $number;
   }
 
 

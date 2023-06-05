@@ -26,8 +26,6 @@ session_start();
             <input type='submit' name='mostrarven' value='Mostrar Ventas' class='form_boton'
                 onclick=this.form.action='MostrarEmpleadosVista.php'>
             <br><br>
-            <input type='submit' name='editarven' value='Editar Venta' class='form_boton'>
-            <br><br>
             <input type='submit' name='eliminarven' value='Eliminar Venta' class='form_boton'>
             <br><br>
             <input type='submit' name='vol_menu_usu' value='Volver' class = 'form_boton_menuPro_volver'
