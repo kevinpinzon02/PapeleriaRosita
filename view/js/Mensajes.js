@@ -35,6 +35,18 @@ class Mensajes {
     );
   }
 
+  AgregarVenta() {
+    swal("¡Registro exitoso!", "Se ha registrado el venta", "success");
+  }
+
+  ExisteVenta() {
+    swal(
+      "El venta que trata de ingresar ya existe",
+      "Verifica los datos",
+      "error"
+    );
+  }
+
   AgregarProducto() {
     swal("¡Registro exitoso!", "Se ha registrado el producto", "success");
   }

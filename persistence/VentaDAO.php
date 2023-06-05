@@ -48,7 +48,7 @@ function __construct() {
           echo "no se logor insertar";
         return 3;
       }else{
-        $this->actualizarPoructo($newventa ->getListaproductos(),$id2);
+        //$this->actualizarPoructo($newventa ->getListaproductos(),$id2);
       }
            
     }else {

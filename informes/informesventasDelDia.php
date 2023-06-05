@@ -3,10 +3,20 @@
 require_once('../fpdf/fpdf.php');
 require('../persistence/conexion.php');
 
+/**
+ * Clase PDF
+ *
+ * Esta clase extiende la clase FPDF y se utiliza para generar el reporte de ventas en formato PDF.
+ */
+
 class PDF extends FPDF
 {
 
-   // Cabecera de página
+   /**
+    * Método Header
+    *
+    * Este método se ejecuta al inicio de cada página y se encarga de mostrar la cabecera del reporte.
+    */
    function Header()
    {
 
@@ -41,7 +51,11 @@ class PDF extends FPDF
       $this->Cell(50, 10, utf8_decode('DETALLE VENTA'), 1, 1, 'C', 1);
    }
 
-   // Pie de página
+   /**
+    * Método Footer
+    *
+    * Este método se ejecuta al final de cada página y se encarga de mostrar el pie de página.
+    */
    function Footer()
    {
       $this->SetY(-15); // Posición: a 1,5 cm del final
@@ -55,12 +69,6 @@ class PDF extends FPDF
    }
 }
 
-//include '../../recursos/Recurso_conexion_bd.php';
-//require '../../funciones/CortarCadena.php';
-/* CONSULTA INFORMACION DEL HOSPEDAJE */
-//$consulta_info = $mysqli->query(" select *from usuario ");
-//$dato_info = $consulta_info->fetch_object();
-
 $pdf = new PDF();
 $pdf->AddPage(); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
 $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
@@ -69,28 +77,29 @@ $i = 0;
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
+// Se realiza la consulta a la base de datos para obtener los datos de las ventas del día
 $consulta_reporte_alquiler = $conexion->query("select id_venta,estado, valor_venta,fecha_venta,detalle_venta
 from venta where fecha_venta = CURDATE();");
 
 
-while ($row = $consulta_reporte_alquiler->fetch_assoc()) {  
-$texto = $row['detalle_venta'];
-$texto2 = strlen($texto);
-if($texto2>55){
-   $alto2 = 5; 
-   $alto = 10;
-}else {
-   $alto2 = 5;
-   $alto = 5;}  
-$i = $i + 1;
-/* TABLA */
-         $pdf->Cell(10,$alto,$row['id_venta'],1,0,'C',0);
-         $pdf->Cell(25,$alto,$row['estado'],1,0,'C',0);
-         $pdf->Cell(30,$alto,$row['valor_venta'],1,0,'C',0);
-         $pdf->Cell(30,$alto,$row['fecha_venta'],1,0,'C',0);
-         $pdf->Cell(50,$alto,$row['detalle_venta'],1,1,'C',0);
-
+while ($row = $consulta_reporte_alquiler->fetch_assoc()) {
+   $texto = $row['detalle_venta'];
+   $texto2 = strlen($texto);
+   // Se determina la altura de las celdas de acuerdo a la longitud del texto
+   if ($texto2 > 55) {
+      $alto2 = 5;
+      $alto = 10;
+   } else {
+      $alto2 = 5;
+      $alto = 5;
+   }
+   $i = $i + 1;
+   /* TABLA */
+   $pdf->Cell(10, $alto, $row['id_venta'], 1, 0, 'C', 0);
+   $pdf->Cell(25, $alto, $row['estado'], 1, 0, 'C', 0);
+   $pdf->Cell(30, $alto, $row['valor_venta'], 1, 0, 'C', 0);
+   $pdf->Cell(30, $alto, $row['fecha_venta'], 1, 0, 'C', 0);
+   $pdf->Cell(50, $alto, $row['detalle_venta'], 1, 1, 'C', 0);
 }
 $pdf->Output();//nombreDescarga, Visor(I->visualizar - D->descargar)
-
 ?>

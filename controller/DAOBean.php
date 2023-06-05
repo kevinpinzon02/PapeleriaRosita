@@ -106,34 +106,44 @@ if (isset($_POST['asignar_usuario'])) {
 
 }
 
-/** ---------------------------------- REGISTRAR COMPRA --------------------------------- */
 
-if (isset($_POST['registrar_compra'])) {
+/** ---------------------------------- REGISTRAR VENTA --------------------------------- */
 
-      $valorC = $_POST['valor_compra'];
-      $fechaC = $_POST['fecha_compra'];
-      $cantidadC = $_POST['cantidad_compra'];
-      $estado = $_POST['estado_compra'];
-      $detalle = $_POST['detalle_compra'];
-      $pedido = $_POST['pedido_compra'];
-      $usuario = $_POST['usuario_compra'];
+if (isset($_POST['registrar_venta'])) {
 
-      if ($pedido == 'seleccionar') {
-            $mensaje = "<script>
-                        const instancia = new Mensajes();
-                        instancia.ErrorComboTI();
-                        </script>";
+      $valorVenta = $_POST['valor_venta'];
+      $fechaVenta = $_POST['fecha_venta'];
+      $detalleVenta = $_POST['detalle_venta'];
+      $usuario = $_POST['usuario_venta'];
+      $estado = $_POST['estado_venta'];
+      $codigo = $_POST['codigo_venta'];
 
-            redirigirRegistrarEmpleado($mensaje);
-      }
+      $productosArray = array();
+      $productosSeleccionados = $_POST['seleccion_producto'];
+      $cantidades = $_POST['cantidad_producto'];
 
-      if ($usuario == 'seleccionar') {
+
+      for ($i = 0; $i < count($productosSeleccionados); $i++) {
+      $productoSeleccionado = $productosSeleccionados[$i];
+      $cantidad = $cantidades[$i];
+
+      // Crear un arreglo asociativo con el producto y la cantidad
+      $producto = array(
+          'id_producto' => $productoSeleccionado,
+          'cantidad' => $cantidad
+      );
+
+      // Agregar el producto al arreglo principal
+      $productosArray[] = $producto;
+  }
+
+      if ($proveedor == 'seleccionar') {
             $mensaje = "<script>
                         const instancia = new Mensajes();
                         instancia.ErrorComboRol();
                         </script>";
 
-            redirigirRegistrarEmpleado($mensaje);
+                        redirigirRegistrarVenta($mensaje);
       }
 
       if ($estado == 'seleccionar') {
@@ -142,12 +152,99 @@ if (isset($_POST['registrar_compra'])) {
                         instancia.ErrorComboEstado();
                         </script>";
 
-            redirigirRegistrarEmpleado($mensaje);
+                        redirigirRegistrarVenta($mensaje);
       }
 
 
+      $newcompra = new VentaDAO();
+      $insert = $newcompra->insertar(new VentaDTO($valorVenta, $fechaVenta, $detalleVenta, $estado, $usuario,$codigo,$productosArray));
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarVenta();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExisteVenta();
+                        </script>";
+
+      }
+
+
+      redirigirRegistrarVenta($mensaje);
+
+}
+
+/** ---------------------------------- REGISTRAR COMPRA --------------------------------- */
+
+if (isset($_POST['registrar_compra'])) {
+
+      $valorC = $_POST['valor_compra'];
+      $fechaC = $_POST['fecha_compra'];
+      $cantidadC = $_POST['codigo_compra'];
+      $estado = $_POST['estado_compra'];
+      $detalle = $_POST['detalle_compra'];
+      $pedido = $_POST['pedido_compra'];
+     
+
+      if ($pedido == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboTI();
+                        </script>";
+
+            redirigirRegistrarCompra($mensaje);
+      }
+
+      if ($cantidadC == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboRol();
+                        </script>";
+
+                        redirigirRegistrarCompra($mensaje);
+      }
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+                        redirigirRegistrarCompra($mensaje);
+      }
+
+      $productosArray = array();
+      $productosSeleccionados = $_POST['seleccion_producto'];
+      $cantidades = $_POST['cantidad_producto'];
+
+
+      for ($i = 0; $i < count($productosSeleccionados); $i++) {
+      $productoSeleccionado = $productosSeleccionados[$i];
+      $cantidad = $cantidades[$i];
+
+      // Crear un arreglo asociativo con el producto y la cantidad
+      $producto = array(
+          'id_producto' => $productoSeleccionado,
+          'cantidad' => $cantidad
+      );
+
+      // Agregar el producto al arreglo principal
+      $productosArray[] = $producto;
+  }
+
+      $newusuario = new EmpleadoDAO();
+      $nombre = $_SESSION['identificacion'];
+      $idde= $nombre;
+      $obterid= $newusuario->sacarid($idde);
+
       $newcompra = new CompraDAO();
-      $insert = $newcompra->insertar(new CompraDTO($IDENTIFICACION, $tipo, $nombre, $apellido, $rol, $edad, $estado, $celular));
+      $insert = $newcompra->insertar(new CompraDTO( $valorC,$fechaC , $pedido,  $detalle,   $estado, $obterid, $cantidadC,$productosArray));
 
       if ($insert === 1) {
             $mensaje = "<script>
@@ -166,7 +263,7 @@ if (isset($_POST['registrar_compra'])) {
       }
 
 
-      redirigirRegistrarEmpleado($mensaje);
+      redirigirRegistrarCompra($mensaje);
 
 }
 
@@ -483,6 +580,22 @@ function redirigirRegistrarEmpleado($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
       $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirRegistrarCompra($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/Menu.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirRegistrarVenta($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarVentaVista.php'; // Cambia 'index.php' por la URL de tu página principal
       header("Location: $paginaPrincipal");
       exit();
 }

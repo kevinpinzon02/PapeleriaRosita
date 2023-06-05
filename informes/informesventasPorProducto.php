@@ -2,11 +2,17 @@
 
 require_once('../fpdf/fpdf.php');
 require('../persistence/conexion.php');
-
+/**
+ * Clase PDF
+ *
+ * Esta clase extiende la clase FPDF y se utiliza para generar un reporte en PDF.
+ */
 class PDF extends FPDF
 {
 
-   // Cabecera de página
+   /**
+    * Cabecera de página
+    */
    function Header()
    {
 
@@ -43,7 +49,9 @@ class PDF extends FPDF
       $this->Cell(50, 10, utf8_decode('DETALLES'), 1, 1, 'C', 1);
    }
 
-   // Pie de página
+   /**
+    * Pie de página
+    */
    function Footer()
    {
       $this->SetY(-15); // Posición: a 1,5 cm del final
@@ -57,11 +65,13 @@ class PDF extends FPDF
    }
 }
 
-//include '../../recursos/Recurso_conexion_bd.php';
-//require '../../funciones/CortarCadena.php';
-/* CONSULTA INFORMACION DEL HOSPEDAJE */
-//$consulta_info = $mysqli->query(" select *from usuario ");
-//$dato_info = $consulta_info->fetch_object();
+/**
+ * Función crear
+ *
+ * Esta función crea un reporte en PDF utilizando la clase PDF y los datos de ventas por vendedor.
+ *
+ * @param int $IDproducto ID del producto para filtrar las ventas
+ */
 
 function crear($IDproducto)
 {
