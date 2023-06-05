@@ -31,7 +31,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     Fecha de<br>realización: 
                     <input class="form_campos" name="fechaRealizada_pedido" type="date" autocomplete="off" required placeholder="YYYY-MM-DD">
                     <br><br>
-                    Fecha esperada: 
+                    Fecha de<br>llegada: 
                     <input class="form_campos" name="fechaEspera_pedido" type="date" autocomplete="off" required placeholder="YYYY-MM-DD">
 
                     <br><br>Proveedor:

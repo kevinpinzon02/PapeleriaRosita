@@ -71,7 +71,7 @@ class Mensajes {
     );
   }
 
-  ErrorBD() {
+  static ErrorBD() {
     swal({
       title: "Ha ocurrido un error",
       icon: "error",
@@ -152,9 +152,7 @@ class Mensajes {
             }
             if (valor === 2) {
               Mensajes.EliminacionEmpleadoNoEfectiva();
-            } else {
-              Mensajes.ErrorBD();
-            }
+            } 
           }
         };
         xhr.send(data);
@@ -163,6 +161,163 @@ class Mensajes {
       }
     });
   }
+
+  static EliminacionProductoEfectiva() {
+    swal("Se ha eliminado correctamente el producto", {
+      icon: "success",
+    });
+  }
+
+  static EliminacionProductoNoEfectiva() {
+    swal(
+      "El producto que tratas de eliminar no existe",
+      "Verifica los datos",
+      "error"
+    );
+  }
+
+  EliminarProducto() {
+    swal({
+      title: "Digite el producto que deseas eliminar:",
+      content: "input",
+    }).then((value) => {
+      if (value) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../controller/DAOBean.php", true);
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        var data = "valorPR=" + encodeURIComponent(value);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var responseText = xhr.responseText;
+            var startIndex = responseText.indexOf("{");
+            var endIndex = responseText.lastIndexOf("}");
+            var jsonResponse = responseText.substring(startIndex, endIndex + 1);
+            var response = JSON.parse(jsonResponse);
+            var valor = response.valor;
+            console.log("Respuesta del servidor: " + valor);
+            if (valor === 1) {
+              Mensajes.EliminacionProductoEfectiva();
+            }
+            if (valor === 2) {
+              Mensajes.EliminacionProductoNoEfectiva();
+            } 
+          }
+        };
+        xhr.send(data);
+      } else {
+        swal("¡Has cancelado el proceso de eliminación!");
+      }
+    });
+  }
+
+  static EliminacionProveedorEfectiva() {
+    swal("Se ha eliminado correctamente el proveedor", {
+      icon: "success",
+    });
+  }
+
+  static EliminacionProveedorNoEfectiva() {
+    swal(
+      "El proveedor que tratas de eliminar no existe",
+      "Verifica los datos",
+      "error"
+    );
+  }
+
+  EliminarProveedor() {
+    swal({
+      title: "Digite el NIT del proveedor que deseas eliminar:",
+      content: "input",
+    }).then((value) => {
+      if (value) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../controller/DAOBean.php", true);
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        var data = "valo=" + encodeURIComponent(value);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var responseText = xhr.responseText;
+            var startIndex = responseText.indexOf("{");
+            var endIndex = responseText.lastIndexOf("}");
+            var jsonResponse = responseText.substring(startIndex, endIndex + 1);
+            console.log("Donde está mal:  "+jsonResponse);
+            var response = JSON.parse(jsonResponse);
+            console.log(response);
+            var valor = response.valor;
+            console.log("Respuesta del servidor: " + valor);
+            if (valor === 1) {
+              Mensajes.EliminacionProveedorEfectiva();
+            }
+            if (valor === 2) {
+              Mensajes.EliminacionProveedorNoEfectiva();
+            } 
+          }
+        };
+        xhr.send(data);
+      } else {
+        swal("¡Has cancelado el proceso de eliminación!");
+      }
+    });
+  }
+
+  static EliminacionPedidoEfectiva() {
+    swal("Se ha eliminado correctamente el pedido", {
+      icon: "success",
+    });
+  }
+
+  static EliminacionPedidoNoEfectiva() {
+    swal(
+      "El pedido que tratas de eliminar no existe",
+      "Verifica los datos",
+      "error"
+    );
+  }
+
+  EliminarPedido() {
+    swal({
+      title: "Digita el código del pedido que deseas eliminar:",
+      content: "input",
+    }).then((value) => {
+      if (value) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../controller/DAOBean.php", true);
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        var data = "valorPED=" + encodeURIComponent(value);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var responseText = xhr.responseText;
+            var startIndex = responseText.indexOf("{");
+            var endIndex = responseText.lastIndexOf("}");
+            var jsonResponse = responseText.substring(startIndex, endIndex + 1);
+            var response = JSON.parse(jsonResponse);
+            var valor = response.valor;
+            console.log("Respuesta del servidor: " + valor);
+            if (valor === 1) {
+              Mensajes.EliminacionPedidoEfectiva();
+            }
+            if (valor === 2) {
+              Mensajes.EliminacionPedidoNoEfectiva();
+            } 
+          }
+        };
+        xhr.send(data);
+      } else {
+        swal("¡Has cancelado el proceso de eliminación!");
+      }
+    });
+  }
+
+  
 }
 
 const clMensajes = new Mensajes();

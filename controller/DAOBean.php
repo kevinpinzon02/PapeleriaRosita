@@ -81,27 +81,27 @@ if (isset($_POST['asignar_usuario'])) {
 
 
       $newusuario = new EmpleadoDAO();
-      $asignar = $newusuario->asignarContraseña($identificacion,$contrasenia);
+      $asignar = $newusuario->asignarContraseña($identificacion, $contrasenia);
       echo $asignar;
 
       if ($asignar === 1) {
 
-             $mensaje = "<script>
+            $mensaje = "<script>
                          console.log('funcionaaaa');
                          const instancia = new Mensajes();
                          instancia.AsignarContraseña();
                          </script>";
-       }
+      }
 
-       if ($asignar === 2) {
-             $mensaje = "<script>
+      if ($asignar === 2) {
+            $mensaje = "<script>
                          const instancia = new Mensajes();
                          instancia.NoExisteUsuario();
                          </script>";
 
-       }
+      }
 
-       redirigirAsignarContraseña($mensaje);
+      redirigirAsignarContraseña($mensaje);
 
 
 }
@@ -348,12 +348,12 @@ if (isset($_POST['registrar_producto'])) {
                         instancia.ErrorComboEstado();
                         </script>";
 
-                  redirigirRegistrarProducto($mensaje);
+            redirigirRegistrarProducto($mensaje);
       }
 
 
       $newpedido = new ProductoDAO();
-      $insert = $newpedido->insertar(new ProductoDTO($nombre,$valorC,$valorV,$cantidad,$detalle,$estado,$codigo));
+      $insert = $newpedido->insertar(new ProductoDTO($nombre, $valorC, $valorV, $cantidad, $detalle, $estado, $codigo));
 
 
       if ($insert === 1) {
@@ -397,7 +397,7 @@ if (isset($_POST['registrar_pedido'])) {
 
 
       $newpedido = new PedidoDAO();
-      $insert = $newpedido->insertar(new PedidoDTO($codigo,$fechaR,$fechaE,$detalle,$estado,$proveedor));
+      $insert = $newpedido->insertar(new PedidoDTO($codigo, $fechaR, $fechaE, $detalle, $estado, $proveedor));
 
 
       if ($insert === 1) {
@@ -466,6 +466,8 @@ if (isset($_POST['registrar_proveedor'])) {
 
 }
 
+/**------------------------------- Eliminar Empleado ---------------------------- */
+
 if (isset($_POST['eliminaremp'])) {
 
       $mensaje = "<script>
@@ -489,8 +491,79 @@ if (isset($_POST['valor'])) {
 }
 
 
+/**------------------------------- Eliminar Producto ---------------------------- */
+
+if (isset($_POST['eliminarpro'])) {
+
+      $mensaje = "<script>
+                  const instancia = new Mensajes();
+                  instancia.EliminarProducto();
+                  </script>";
+
+      redirigirEliminarProducto($mensaje);
+
+}
+if (isset($_POST['valorPR'])) {
+      $valor = $_POST['valorPR'];
+      $newproducto = new ProductoDAO();
+      $eliminar = $newproducto->eliminar($valor);
+
+      $response = array('valor' => $eliminar);
+
+      header('Content-Type: application/json');
+      echo json_encode($response);
+      exit; // Terminar la ejecución del script aquí
+}
+
+/** ----------------------------------- ELIMINAR PROVEEDOR -------------------------- */
 
 
+if (isset($_POST['eliminarprovee'])) {
+
+      $mensaje = "<script>
+                  const instancia = new Mensajes();
+                  instancia.EliminarProveedor();
+                  </script>";
+
+      redirigirEliminarProveedor($mensaje);
+
+}
+if (isset($_POST['valo'])) {
+      $valor = $_POST['valo'];
+      $newprovedor = new ProveedorDAO();
+      $eliminar = $newprovedor->eliminar($valor);
+
+      $response = array('valor' => $eliminar);
+
+      header('Content-Type: application/json');
+      echo json_encode($response);
+      exit; // Terminar la ejecución del script aquí
+}
+
+/** ------------------------------------ ELIMINAR PEDIDO ---------------------------- */
+
+
+if (isset($_POST['eliminarped'])) {
+
+      $mensaje = "<script>
+                  const instancia = new Mensajes();
+                  instancia.EliminarPedido();
+                  </script>";
+
+      redirigirEliminarPedido($mensaje);
+
+}
+if (isset($_POST['valorPED'])) {
+      $valor = $_POST['valorPED'];
+      $newpedido = new PedidoDAO();
+      $eliminar = $newpedido->eliminar($valor);
+      
+      $response = array('valor' => $eliminar);
+
+      header('Content-Type: application/json');
+      echo json_encode($response);
+      exit; // Terminar la ejecución del script aquí
+}
 
 
 /**------------------------------------REDIRIGIR------------------------------------ */
@@ -566,6 +639,30 @@ function redirigirEliminarEmpleado($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/");
       $paginaPrincipal = '../view/MenuEmpleadoVista.php';
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirEliminarProducto($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/");
+      $paginaPrincipal = '../view/MenuProductoVista.php';
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirEliminarProveedor($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/");
+      $paginaPrincipal = '../view/MenuProveedorVista.php';
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirEliminarPedido($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/");
+      $paginaPrincipal = '../view/MenuPedidoVista.php';
       header("Location: $paginaPrincipal");
       exit();
 }

@@ -70,8 +70,9 @@ $i = 0;
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
-// Se ejecuta la consulta para obtener los productos con cantidad mayor a 5
-$consulta_reporte_alquiler = $conexion->query("select * from producto WHERE CANTIDAD > 5");
+
+$consulta_reporte_alquiler = $conexion->query("select * from producto WHERE CANTIDAD < 5");
+
 
 // Se itera sobre los resultados de la consulta y se muestra en la tabla del PDF
 while ($row = $consulta_reporte_alquiler->fetch_assoc()) {

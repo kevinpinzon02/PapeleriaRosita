@@ -24,9 +24,7 @@ session_start();
             <input type='submit' name='registrarped' value='Registrar Pedido' class='form_boton' onclick=this.form.action='RegistrarPedidoVista.php'>
             <br><br>
             <input type='submit' name='mostrarped' value='Mostrar Pedidos' class='form_boton'
-                onclick=this.form.action='MostrarEmpleadosVista.php'>
-            <br><br>
-            <input type='submit' name='editarped' value='Editar Pedido' class='form_boton'>
+                onclick=this.form.action='MostrarPedidosVista.php'>
             <br><br>
             <input type='submit' name='eliminarped' value='Eliminar Pedido' class='form_boton'>
             <br><br>
