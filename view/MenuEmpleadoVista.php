@@ -29,8 +29,6 @@ session_start();
             <input type='submit' name='mostraremp' value='Mostrar Empleados' class='form_boton'
                 onclick=this.form.action='MostrarEmpleadosVista.php'>
             <br><br>
-            <input type='submit' name='editaremp' value='Editar Empleado' class='form_boton'>
-            <br><br>
             <input type='submit' name='eliminaremp' value='Eliminar Empleado' class='form_boton'>
             <br><br>
             <input type='submit' name='asigUsu' value='Asignar Usuario' class='form_boton'

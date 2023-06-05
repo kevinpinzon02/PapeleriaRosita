@@ -35,7 +35,7 @@
                         Cantidad: 
                     <input class='form_campos' name="cantidad_prod" type="number" autocomplete="off" style="left: 600px" required>
                     <br><br>Detalle del<br>producto:
-                    <input class='form_campos' name="detalle_prod" type="text" autocomplete="off" style="left: 600px" required>
+                    <input class='form_campos' name="detalle_prod" type="text" autocomplete="off" style="left: 600px">
 
                     <br><br>Estado:
                     <select class='form_campos' name='estado_prod' style="left: 600px">

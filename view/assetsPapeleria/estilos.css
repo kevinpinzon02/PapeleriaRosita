@@ -10,22 +10,6 @@
   overflow: auto;
 }
 
-.scroll-pane table {
-  width: 100%; /* Ajusta el ancho de la tabla según tus necesidades */
-  font-size: 14px; /* Ajusta el tamaño de fuente según tus necesidades */
-}
-
-.scroll-pane table thead tr:first-child th {
-  position: sticky;
-  top: 0;
-  background-color: red; /* Ajusta el color de fondo según tus necesidades */
-  z-index: 1;
-}
-
-.scroll-pane table thead tr:not(:first-child) th {
-  background-color: inherit; /* Mantener el color de fondo original en las otras filas del encabezado */
-}
-
 
 body {
   font-family: "Montserrat", sans-serif;
@@ -106,17 +90,14 @@ header {
   padding: 0.5em 0rem;
   border: none;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 .mostrar_tabla {
   text-align: center;
 }
 .container {
   margin: auto;
-}
-
-.table_wraper {
-  max-height: 550px;
-  overflow-y: scroll;
+  text-align: center;
 }
 
 table {
@@ -130,7 +111,7 @@ table {
 }
 
 thead {
-  background: rgb(230, 11, 62);
+  background: #e60b3e;
 }
 
 th,
@@ -205,6 +186,7 @@ tr {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .form_boton_usu_izq{
@@ -219,7 +201,7 @@ tr {
   padding: 0.5em 0rem;
   border: none;
   border-radius: 0.5rem;
-
+  cursor: pointer;
 }
 
 .form_boton_usu_izq:hover {
@@ -241,7 +223,7 @@ tr {
   padding: 0.5em 0rem;
   border: 2px solid #0899ab;
   border-radius: 0.5rem;
-
+  cursor: pointer;
 }
 
 .form_boton_usu_der:hover {
@@ -283,6 +265,7 @@ tr {
   border-radius: 0.5rem;
   width: 90%; /* Utiliza el ancho completo del contenedor */
   margin-bottom: 0.5em; /* Espacio entre los botones */
+  cursor: pointer;
 }
 
 .form_botones_menu:hover {
@@ -318,7 +301,7 @@ tr {
   position: absolute; /* Establece la posición absoluta */
   top:530px; /* Coordenada vertical desde la parte superior */
   left: 1150px; /* Coordenada horizontal desde la parte izquierda */
-
+  cursor: pointer;
 }
 
 .form_boton_menu_volver:hover {
@@ -349,6 +332,7 @@ tr {
   position: absolute; /* Establece la posición absoluta */
   top:620px; /* Coordenada vertical desde la parte superior */
   left: 810px; /* Coordenada horizontal desde la parte izquierda */
+  cursor: pointer;
 }
 
 .form_boton_menuUsu_volver:hover {
@@ -382,6 +366,7 @@ tr {
 
   float: right;
   margin-left: 180px;
+  cursor: pointer;
 }
 
 .form_boton_menuPro_volver:hover {
@@ -392,6 +377,49 @@ tr {
 }
 
 
+.btn_reporte {
+  flex: 1;
+  margin: 0 25px;
+  background-color: #f0f3f7;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  font-size: 1.1rem;
+  padding: 0.7em 1rem;
+  border: 2px solid #e60b3e;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+  
+.btn_reporte:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  background-color: #f0f3f7;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn_volver_reporte {
+  flex: 1;
+  margin: 0 70px;
+  background-color: #f0f3f7;
+  color: #000000;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  font-size: 1.1rem;
+  padding: 0.7em 1rem;
+  border: 2px solid #e60b3e;
+  border-radius: 0.5rem;
+  width: 15%; 
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn_volver_reporte:hover {
+  /* Agrega aquí las propiedades para el efecto cuando se coloca el cursor sobre el botón */
+  background-color: #f0f3f7;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
 
 

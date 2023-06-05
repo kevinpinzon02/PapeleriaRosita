@@ -58,7 +58,7 @@ class ProveedorDAO
   }
 
 
-  public function buscar(string $ide)
+  public function buscar(String $ide)
   {
     $consult = "SELECT * FROM proveedor WHERE nit = '$ide'";
     $result2 = $this->conexion->query($consult);
@@ -84,9 +84,9 @@ class ProveedorDAO
     }
 
   }
-  public function eliminar(int $ide)
+  public function eliminar(String $ide)
   {
-
+    $number = 0;
     $encontrar = $this->buscar($ide);
 
     if ($encontrar === true) {
@@ -101,12 +101,15 @@ class ProveedorDAO
         $eliminartelefeno = "DELETE FROM proveedor WHERE nit = '$ide'";
         $elim = $this->conexion->prepare($eliminartelefeno);
         $eli = $elim->execute();
+        
+        $number = 1;
 
       }
     } else {
-      echo "no se borro";
+      $number = 2;
 
     }
+    return $number;
   }
   public function actualizar($empl)
   {
