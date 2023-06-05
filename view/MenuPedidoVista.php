@@ -1,4 +1,14 @@
 <?php
+/**
+ * Script para ver opciones del pedido
+ * 
+ * Este script se encarga de mostrar el menu con todas las funciones del pedido
+ * 
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 ?>
 

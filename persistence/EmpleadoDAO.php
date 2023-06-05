@@ -5,22 +5,38 @@ require_once('ConexionBD.php');
 
 //use model\EmpleadoDTO;
 
-
+/**
+ * Clase EmpleadoDAO
+ *
+ * Esta clase se encarga de gestionar la persistencia de los objetos EmpleadoDTO en la base de datos.
+ */
 class EmpleadoDAO
 {
   private $conexion;
   private $empleadodto;
 
+  /**
+   * Constructor de la clase EmpleadoDAO.
+   *
+   * Establece la conexión con la base de datos al crear una instancia de la clase.
+   */
   function __construct()
   {
 
     $this->conexion = new Conexion();
     $this->conexion = $this->conexion->connect();
-
-
   }
 
-
+  /**
+   * Inserta un nuevo empleado en la base de datos.
+   *
+   * @param EmpleadoDTO $newempl Objeto EmpleadoDTO a insertar
+   * @return int El número que indica el resultado de la operación:
+   *             0 - No se pudo realizar la inserción
+   *             1 - Inserción exitosa
+   *             2 - El empleado ya existe en la base de datos
+   *             3 - Error al insertar el teléfono del empleado
+   */
   public function insertar($newempl)
   {
     $numero = 0;
@@ -47,16 +63,20 @@ class EmpleadoDAO
         if (($inse3 = $insert2->execute($data2)) === false) {
           $numero = 3;
         }
-
       }
-
     } else {
       $numero = 2;
     }
     return $numero;
   }
 
-
+  /**
+   * Verifica si un empleado está identificado correctamente en la base de datos.
+   *
+   * @param int $ide Identificación del empleado
+   * @param string $contraseña Contraseña del empleado
+   * @return bool Retorna true si el empleado está identificado correctamente, de lo contrario retorna false
+   */
   public function identificar($ide, $contraseña)
   {
     try {
@@ -74,7 +94,16 @@ class EmpleadoDAO
       return false;
     }
   }
-
+  /**
+   * Asigna una nueva contraseña a un empleado en la base de datos.
+   *
+   * @param int $ide Identificación del empleado
+   * @param string $contraseña Nueva contraseña a asignar
+   * @return int El número que indica el resultado de la operación:
+   *             0 - No se pudo asignar la contraseña
+   *             1 - Contraseña asignada exitosamente
+   *             2 - El empleado no existe en la base de datos
+   */
   public function asignarContraseña($ide, $contraseña)
   {
 
@@ -86,21 +115,22 @@ class EmpleadoDAO
       $result2 = $this->conexion->query($consult);
       $ersut = $result2->fetchall(PDO::FETCH_ASSOC);
       if (($ersut) != null) {
-
       } else {
-       
       }
 
       $numero = 1;
-      
     } else {
       $numero = 2;
     }
 
     return $numero;
-
   }
-
+  /**
+   * Obtiene el ID de usuario asociado a una identificación de empleado.
+   *
+   * @param int $ide Identificación del empleado
+   * @return int El ID de usuario correspondiente a la identificación del empleado, o 0 si no se encuentra
+   */
   public function sacarid($ide)
   {
     try {
@@ -119,7 +149,12 @@ class EmpleadoDAO
     }
   }
 
-
+  /**
+   * Busca un empleado en la base de datos por su identificación.
+   *
+   * @param int $ide Identificación del empleado
+   * @return bool Retorna true si el empleado existe en la base de datos, de lo contrario retorna false
+   */
   public function buscar(int $ide)
   {
     $consult = "SELECT * FROM usuario WHERE identificacion =$ide";
@@ -130,8 +165,16 @@ class EmpleadoDAO
     } else {
       return false;
     }
-
   }
+  /**
+   * Elimina un empleado de la base de datos por su identificación.
+   *
+   * @param int $ide Identificación del empleado
+   * @return int El número que indica el resultado de la operación:
+   *             1 - Eliminación exitosa
+   *             2 - El empleado no existe en la base de datos
+   *             3 - Error al eliminar el teléfono del empleado
+   */
   public function eliminar(int $ide)
   {
     $encontrar = $this->buscar($ide);
@@ -149,13 +192,16 @@ class EmpleadoDAO
         $elim = $this->conexion->prepare($eliminarusuario);
         $eli = $elim->execute();
         return 1;
-
       }
     } else {
       return 2;
-
     }
   }
+  /**
+   * Actualiza los datos de un empleado en la base de datos.
+   *
+   * @param EmpleadoDTO $empl Objeto EmpleadoDTO con los nuevos datos del empleado
+   */
   public function actualizar($empl)
   {
     $sql = "UPDATE usuario SET identificacion = ?, tipo_identificacion = ?, nombre = ?, apellido = ?, rol = ?, edad = ?, estado = ? WHERE identificacion = ?";
@@ -184,21 +230,26 @@ class EmpleadoDAO
         echo "hubo un erro";
       }
     }
-
   }
 
 
-
+  /**
+   * Obtiene el objeto EmpleadoDTO asociado a la clase EmpleadoDAO.
+   *
+   * @return mixed El objeto EmpleadoDTO asociado a la clase EmpleadoDAO
+   */
   public function getEmpleadodto()
   {
     return $this->empleadodto;
   }
-
+  /**
+   * Establece el objeto EmpleadoDTO asociado a la clase EmpleadoDAO.
+   *
+   * @param mixed $empleadodto El objeto EmpleadoDTO a asociar
+   */
   public function setEmpleadodto($empleadodto)
   {
     $this->empleadodto = $empleadodto;
   }
-
-
 }
 ?>

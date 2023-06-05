@@ -1,6 +1,11 @@
 <?php
 
 
+/**
+ * Clase Conexion
+ *
+ * Esta clase maneja la conexión a la base de datos utilizando PDO en PHP.
+ */
  class Conexion {
 	private $host = "localhost";
 	private $user = "rosita";
@@ -9,7 +14,11 @@
 	private $conect;
 
 
-
+/**
+     * Constructor de la clase Conexion.
+     *
+     * Establece la conexión a la base de datos utilizando los parámetros de configuración.
+     */
 public function __construct(){
 
 	$conectionSti= "mysql:hos=".$this->host.";dbname=".$this->db.";charset=utf8";
@@ -24,7 +33,13 @@ public function __construct(){
 	}
 }
 
-
+/**
+     * Método connect
+     *
+     * Retorna la conexión establecida a la base de datos.
+     *
+     * @return PDO La conexión establecida a la base de datos.
+     */
 public function connect(){
 	return $this->conect;
 }

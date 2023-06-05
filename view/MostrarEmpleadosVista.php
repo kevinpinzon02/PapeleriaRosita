@@ -1,4 +1,13 @@
 <?php
+/**
+ * Script para ver a los empleados registrados
+ * 
+ * Este script se encarga de mostrar los empleados
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 ?>
 

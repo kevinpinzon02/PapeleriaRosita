@@ -1,4 +1,14 @@
 <?php
+/**
+ * Script para ver a los proveedor registrados
+ * 
+ * Este script se encarga de mostrar los proveedores
+ * 
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 ?>
 

@@ -6,11 +6,18 @@ require_once('ProductoDAO.php');
   
 //use model\EmpleadoDTO;
 
-
+/**
+ * Clase VentaDAO
+ *
+ * Esta clase se encarga de realizar operaciones relacionadas con la venta en la base de datos.
+ */
 class VentaDAO {
     private $conexion;
     private $ventadto;
-
+/**
+     * Constructor de la clase VentaDAO.
+     * Establece la conexión con la base de datos.
+     */
 function __construct() {
      
      $this->conexion =new Conexion();
@@ -22,7 +29,12 @@ function __construct() {
 
   }
 
-
+/**
+     * Inserta una nueva venta en la base de datos.
+     *
+     * @param VentaDTO $newventa Objeto de tipo VentaDTO que representa la venta a insertar.
+     * @return int Retorna el resultado de la operación (0: no se logró insertar, 1: se insertó correctamente, 2: no se pudo encontrar la venta, 3: error en la ejecución del insert).
+     */
    public function insertar($newventa)
   {
 
@@ -51,8 +63,15 @@ function __construct() {
 
    
     }
-  
-    public function actualizarPoructo($listaproductos,$codigo){
+
+  /**
+     * Actualiza los productos asociados a una venta.
+     *
+     * @param array $listaproductos Array de objetos de tipo ProductoDTO que representa los productos a actualizar.
+     * @param int $codgio Código de la venta.
+     */
+    public function actualizarPoructo($listaproductos,$codgio){
+
      foreach ($listaproductos as $producto) {
       $id_producto = $producto['id_producto'];
       $cantidad = $producto['cantidad'];
@@ -107,7 +126,12 @@ function __construct() {
 }
 
 
-
+/**
+     * Busca una venta en la base de datos por su código.
+     *
+     * @param int $ide Código de la venta a buscar.
+     * @return bool Retorna true si se encontró la venta, false si no se encontró.
+     */
   public function buscar ($ide){
     $consult= "SELECT * FROM venta WHERE codigo_venta = '$ide'";
     $result2 =$this->conexion->query($consult);
@@ -119,26 +143,25 @@ function __construct() {
     }
 
   }
-
+/**
+     * Elimina una venta de la base de datos.
+     *
+     * @param int $ide Código de la venta a eliminar.
+     * @return int Retorna el resultado de la operación (0: no se pudo borrar, 1: se borró correctamente, 2: no se encontró la venta).
+     */
     public function eliminar($ide) {
      
 }
 
+    /**
+     * Actualiza los datos de un producto en la base de datos.
+     *
+     * @param ProductoDTO $newproc Objeto de tipo ProductoDTO que representa el producto a actualizar.
+     */
 public function actualizar($newproc) {
   
 
 }
-
-
-
-public function getEmpleadodto() {
-  return $this->empleadodto;
-}
-
-public function setEmpleadodto($empleadodto) {
-  $this->empleadodto = $empleadodto;
-}
-
 
 }
   ?>

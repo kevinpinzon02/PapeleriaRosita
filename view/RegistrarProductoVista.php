@@ -1,4 +1,24 @@
+<?php
+/**
+ * Script para registrar un producto
+ * 
+ * Este script se encarga de establecer la conexión con la base de datos y procesar el formulario
+ * para registrar un producto
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
+session_start();
+
+$servername = "localhost";
+$username = "rosita";
+$password = "123456";
+$dbname = "papeleriarosita";
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+?>
 <head>
+    
 
 <style scoped>   @import url("assetsPapeleria/estilos.css"); </style>
     <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>

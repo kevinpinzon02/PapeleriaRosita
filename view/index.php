@@ -1,4 +1,14 @@
 <?php
+/**
+ * Script para asignar un usuario en la aplicación de Papelería Rosita.
+ * 
+ * Este script se encarga de establecer la conexión con la base de datos y procesar el formulario
+ * para asignar iniciar sesion. Además, muestra mensajes en caso de éxito o error en la asignación.
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 
 ?>
