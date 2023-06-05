@@ -23,6 +23,30 @@ class Mensajes {
     );
   }
 
+  AgregarProducto() {
+    swal("¡Registro exitoso!", "Se ha registrado el producto", "success");
+  }
+
+  ExisteProducto() {
+    swal(
+      "El producto que trata de ingresar ya existe",
+      "Verifica los datos",
+      "error"
+    );
+  }
+
+  AgregarPedido() {
+    swal("¡Registro exitoso!", "Se ha registrado el pedido", "success");
+  }
+
+  ExistePedido() {
+    swal(
+      "El pedido que trata de ingresar ya existe",
+      "Verifica los datos",
+      "error"
+    );
+  }
+
   ErrorBD() {
     swal({
       title: "Ha ocurrido un error",
