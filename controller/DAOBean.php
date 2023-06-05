@@ -40,7 +40,7 @@ require_once('PedidoDTO.php');
 
 */
 
-
+/**------------------------------ INICIAR SESIÓN ----------------------------------- */
 if (isset($_POST['iniciar_sesion'])) {
       $nombre_usuario = $_POST['nombre_usu'];
       $contrasena = $_POST['password_usu'];
@@ -67,6 +67,43 @@ if (isset($_POST['iniciar_sesion'])) {
       }
 
 }
+
+/** ---------------------------------- ASIGNAR USUARIO ------------------------------- */
+
+
+if (isset($_POST['asignar_usuario'])) {
+
+      $identificacion = $_POST['ident_usu'];
+      $contrasenia = $_POST['contra_usu'];
+
+
+      $newusuario = new EmpleadoDAO();
+      $asignar = $newusuario->asignarContraseña($identificacion,$contrasenia);
+      echo $asignar;
+
+      if ($asignar === 1) {
+
+             $mensaje = "<script>
+                         console.log('funcionaaaa');
+                         const instancia = new Mensajes();
+                         instancia.AsignarContraseña();
+                         </script>";
+       }
+
+       if ($asignar === 2) {
+             $mensaje = "<script>
+                         const instancia = new Mensajes();
+                         instancia.NoExisteUsuario();
+                         </script>";
+
+       }
+
+       redirigirAsignarContraseña($mensaje);
+
+
+}
+
+/** ---------------------------------- REGISTRAR EMPLEADO --------------------------------- */
 
 if (isset($_POST['registrar_empleado'])) {
       $IDENTIFICACION = $_POST['identificacion_usu'];
@@ -318,6 +355,16 @@ function redirigirRegistrarProveedor($mensaje)
       exit();
 }
 
+
+function redirigirAsignarContraseña($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/AsignarUsuarioVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+
 function redirigirRegistrarPedido($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
@@ -325,6 +372,7 @@ function redirigirRegistrarPedido($mensaje)
       header("Location: $paginaPrincipal");
       exit();
 }
+
 
 function redirigirRegistrarProducto($mensaje)
 {
