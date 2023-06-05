@@ -106,6 +106,80 @@ if (isset($_POST['asignar_usuario'])) {
 
 }
 
+
+/** ---------------------------------- REGISTRAR VENTA --------------------------------- */
+
+if (isset($_POST['registrar_venta'])) {
+
+      $valorVenta = $_POST['valor_venta'];
+      $fechaVenta = $_POST['fecha_venta'];
+      $detalleVenta = $_POST['detalle_venta'];
+      $usuario = $_POST['usuario_venta'];
+      $estado = $_POST['estado_venta'];
+      $codigo = $_POST['codigo_venta'];
+
+      $productosArray = array();
+      $productosSeleccionados = $_POST['seleccion_producto'];
+      $cantidades = $_POST['cantidad_producto'];
+
+
+    for ($i = 0; $i < count($productosSeleccionados); $i++) {
+      $productoSeleccionado = $productosSeleccionados[$i];
+      $cantidad = $cantidades[$i];
+
+      // Crear un arreglo asociativo con el producto y la cantidad
+      $producto = array(
+          'id_producto' => $productoSeleccionado,
+          'cantidad' => $cantidad
+      );
+
+      // Agregar el producto al arreglo principal
+      $productosArray[] = $producto;
+  }
+
+      if ($proveedor == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboRol();
+                        </script>";
+
+                        redirigirRegistrarVenta($mensaje);
+      }
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+                        redirigirRegistrarVenta($mensaje);
+      }
+
+
+      $newcompra = new VentaDAO();
+      $insert = $newcompra->insertar(new VentaDTO($valorVenta, $fechaVenta, $detalleVenta, $estado, $usuario,$codigo,$productosArray));
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarVenta();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExisteVenta();
+                        </script>";
+
+      }
+
+
+      redirigirRegistrarVenta($mensaje);
+
+}
+
 /** ---------------------------------- REGISTRAR COMPRA --------------------------------- */
 
 if (isset($_POST['registrar_compra'])) {
@@ -410,6 +484,14 @@ function redirigirRegistrarEmpleado($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
       $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirRegistrarVenta($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarVentaVista.php'; // Cambia 'index.php' por la URL de tu página principal
       header("Location: $paginaPrincipal");
       exit();
 }

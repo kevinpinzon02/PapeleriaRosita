@@ -76,9 +76,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <option value ="<?php echo $opciones['id_usuario'] ?>"><?php echo $opciones['nombre'] ?></option>
                     <?php endforeach ?>
                     </select>
-
                 </div>
-
             </div>
             
     </form>
