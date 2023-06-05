@@ -186,7 +186,7 @@ if (isset($_POST['registrar_compra'])) {
 
       $valorC = $_POST['valor_compra'];
       $fechaC = $_POST['fecha_compra'];
-      $cantidadC = $_POST['cantidad_compra'];
+      $cantidadC = $_POST['codigo_compra'];
       $estado = $_POST['estado_compra'];
       $detalle = $_POST['detalle_compra'];
       $pedido = $_POST['pedido_compra'];
@@ -198,7 +198,7 @@ if (isset($_POST['registrar_compra'])) {
                         instancia.ErrorComboTI();
                         </script>";
 
-            redirigirRegistrarEmpleado($mensaje);
+            redirigirRegistrarCompra($mensaje);
       }
 
       if ($cantidadC == 'seleccionar') {
@@ -207,7 +207,7 @@ if (isset($_POST['registrar_compra'])) {
                         instancia.ErrorComboRol();
                         </script>";
 
-            redirigirRegistrarEmpleado($mensaje);
+                        redirigirRegistrarCompra($mensaje);
       }
 
       if ($estado == 'seleccionar') {
@@ -216,7 +216,7 @@ if (isset($_POST['registrar_compra'])) {
                         instancia.ErrorComboEstado();
                         </script>";
 
-            redirigirRegistrarEmpleado($mensaje);
+                        redirigirRegistrarCompra($mensaje);
       }
 
       $productosArray = array();
@@ -242,9 +242,9 @@ if (isset($_POST['registrar_compra'])) {
       $nombre = $_SESSION['identificacion'];
       $idde= $nombre;
       $obterid= $newusuario->sacarid($idde);
-      echo "este es el id " .$obterid. " este es el id de usuario : ".$idde;
+
       $newcompra = new CompraDAO();
-      $insert = $newcompra->insertar(new CompraDTO( $valorC,$fechaC , 1,  $detalle,   $estado, $obterid, $cantidadC,$productosArray));
+      $insert = $newcompra->insertar(new CompraDTO( $valorC,$fechaC , $pedido,  $detalle,   $estado, $obterid, $cantidadC,$productosArray));
 
       if ($insert === 1) {
             $mensaje = "<script>
@@ -263,7 +263,7 @@ if (isset($_POST['registrar_compra'])) {
       }
 
 
-      redirigirRegistrarEmpleado($mensaje);
+      redirigirRegistrarCompra($mensaje);
 
 }
 
@@ -507,6 +507,14 @@ function redirigirRegistrarEmpleado($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
       $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirRegistrarCompra($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/Menu.php'; // Cambia 'index.php' por la URL de tu página principal
       header("Location: $paginaPrincipal");
       exit();
 }

@@ -35,8 +35,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <br><br>Fecha Compra: 
                     <input class="form_campos" name="fecha_compra" type="date" autocomplete="off" required>
 
-                    <br><br>Cantidad Productos: 
-                    <input class="form_campos" name="cantidad_compra" type="number" autocomplete="off" required>
+                    <br><br>codigo: 
+                    <input class="form_campos" name="codigo_compra" type="number" autocomplete="off" required>
 
                     <br><br>Estado:
                     <select class='form_campos' name='estado_compra'>
@@ -64,18 +64,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <?php endforeach ?>
                     </select>
 
-                    <br><br>Seleccionar<br>usuario:
-                    <select class='form_campos' name='usuario_compra' style="left: 600px">
-                        <option value='seleccionar'>Seleccionar</option>
-
-                    <?php 
-                    $getTipoID = "select * from usuario order by id_usuario";
-                    $getTipoID2 = mysqli_query($conn,$getTipoID) or die(mysqli_error($conn));
-
-                    foreach ($getTipoID2 as $opciones): ?>
-                    <option value ="<?php echo $opciones['id_usuario'] ?>"><?php echo $opciones['nombre'] ?></option>
-                    <?php endforeach ?>
-                    </select>
                 </div>
             </div>
             

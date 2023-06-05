@@ -26,7 +26,8 @@ function __construct() {
     if($encontrar===false){
       $sql= "INSERT INTO compra values (?,?,?,?,?,?,?,?)";
       $insert=$this->conexion->prepare($sql);
-      $data= array(0,$newventa ->getValorCompra(), 
+      $data= array(0,
+      $newventa ->getValorCompra(), 
       $newventa ->getFechaCompra(),
       $newventa ->getDetalleCompra(),
       $newventa ->getEstado(),
@@ -68,8 +69,6 @@ function __construct() {
             echo "Error al insertar en la tabla venta_producto.";
             return; 
           }
-  
-       
 
     }
 
