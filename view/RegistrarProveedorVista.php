@@ -19,19 +19,19 @@
         <div class='form_container_usu'>
             <div class = 'form_campos_div'>
                 <div>
-                            Nombre: 
+                        Nombre: 
                     <input class='form_campos' name="nombre_prov" type="text" autocomplete="off" required>
                     
                     <br><br>Direccion: 
                     <input class='form_campos' name="direccion_prov" type="text" autocomplete="off" required>
 
-                    <br><br>nit: 
+                    <br><br>NIT: 
                     <input class='form_campos' name="nit_prov" type="text" autocomplete="off" required>
                 </div>
                 <div>
                      Asesor:
-                    <input class='form_campos' name="asesor_prov" type="number" autocomplete="off" style="left: 600px" required>
-                    <br><br>Telefono:
+                    <input class='form_campos' name="asesor_prov" type="text" autocomplete="off" style="left: 600px" required>
+                    <br><br>Teléfono:
                     <input class='form_campos' name="telefono_prov" type="number" autocomplete="off" style="left: 600px" required>
                     <br><br>Estado:
                     <select class='form_campos' name='estado_prov' style="left: 600px">
@@ -39,14 +39,13 @@
                         <option value='ACTIVO'>Activo</option>
                         <option value='INACTIVO'>Inactivo</option>
                     </select>
-                    
                 </div>
             </div>
             <br><br>
             <div class = 'form_botones_usu'>
                 <input type='submit' name='registrar_proveedor' value='Registrar' class='form_boton_usu_izq'>
-                <input type='button' value='Volver' class='form_boton_usu_izq' 
-                    onclick="window.location.href='MenuEmpleadoVista.php'">
+                <input type='button' value='Volver' class='form_boton_usu_der' 
+                    onclick="window.location.href='MenuProveedorVista.php'">
                 </div>
     </form>
     <?php
@@ -55,12 +54,6 @@
         $mensaje = $_COOKIE['mensaje'];
         echo $mensaje;
         setcookie("mensaje", "", time() - 3600, "/"); 
-    }
-
-    if (isset($_COOKIE['mensaje2'])) {
-        $mensaje = $_COOKIE['mensaje2'];
-        echo $mensaje;
-        setcookie("mensaje2", "", time() - 3600, "/"); 
     }
 ?>
 

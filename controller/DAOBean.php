@@ -6,6 +6,12 @@ session_start();
 require_once('../persistence/EmpleadoDAO.php');
 require_once('../model/EmpleadoDTO.php');
 
+require_once('../persistence/ProveedorDAO.php');
+require_once('../model/ProveedorDTO.php');
+
+require_once('../persistence/PedidoDAO.php');
+require_once('../model/PedidoDTO.php');
+
 require_once('../persistence/conexion.php');
 
 require_once('../persistence/ProductoDAO.php');
@@ -22,7 +28,7 @@ require_once('../model/CompraDTO.php');
 require_once('../persistence/conexion.php');
 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
 
-echo "<script src='js/Mensajes.js'></script>";
+echo "<script src='http://localhost/PapeleriaRosita/view/js/Mensajes.js'></script>";
 echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'%3E></script>";
 
 
@@ -30,10 +36,9 @@ echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min
 //use persistence\EmpleadoDAO;
 //use model\EmpleadoDTO;
 
-/*
-require_once('ProveedorDAO.php');
-require_once('ProveedorDTO.php');
 
+
+/*
 require_once('PedidoDAO.php');
 require_once('PedidoDTO.php');
 
@@ -48,19 +53,23 @@ if (isset($_POST['iniciar_sesion'])) {
       $newusuario = new EmpleadoDAO();
       $log = $newusuario->identificar($nombre_usuario, $contrasena);
       if ($log === true) {
-          
-              $_SESSION['identificacion'] = $nombre_usuario;
 
-              $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; 
-              header("Location: $paginaPrincipal");
-              echo "se registro";
-              exit();
-        
+
+            $_SESSION['identificacion'] = $nombre_usuario;
+            $paginaPrincipal = '../view/Menu.php';
+            header("Location: $paginaPrincipal");
+            echo "se registro";
+            exit();
+
+
       } else {
-          // Mostrar mensaje de error
-          echo 'swal("Error", "Usuario no encontrado", "error");';
+            $mensaje = "<script>
+                        const aver = new Mensajes();
+                        aver.ErrorUsuarioNoExiste();
+                        </script>";
+            redirigirUsuarioIncorrecto($mensaje);
       }
-  
+
 }
 
 if (isset($_POST['registrar_empleado'])) {
@@ -131,6 +140,7 @@ if (isset($_POST['registrar_empleado'])) {
 
 
 
+
       if ($insert === 1) {
             $mensaje = "<script>
                         const instancia = new Mensajes();
@@ -149,9 +159,142 @@ if (isset($_POST['registrar_empleado'])) {
 
 
       redirigirRegistrarEmpleado($mensaje);
-      // $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular)); 
-      //$newprovedor = new ProveedorDAO(); 
-      //$insert =  $newprovedor ->insertar(NEW ProveedorDTO("jota","653","dcj","pit","ase","A"));
+
+}
+
+/** --------------- REGISTRAR PRODUCTO ---------------------------- */
+if (isset($_POST['registrar_producto'])) {
+
+      $nombre = $_POST['nombre_prod'];
+      $valorC = $_POST['valorC_prod'];
+      $valorV = $_POST['valorV_prod'];
+      $cantidad = $_POST['cantidad_prod'];
+      $detalle = $_POST['detalle_prod'];
+      $estado = $_POST['estado_prod'];
+      $codigo = $_POST['codigo_prod'];
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+                  redirigirRegistrarProducto($mensaje);
+      }
+
+
+      $newpedido = new ProductoDAO();
+      $insert = $newpedido->insertar(new ProductoDTO($nombre,$valorC,$valorV,$cantidad,$detalle,$estado,$codigo));
+
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarProducto();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExisteProducto();
+                        </script>";
+
+      }
+
+      redirigirRegistrarProducto($mensaje);
+
+}
+
+/** --------------- REGISTRAR PEDIDO ---------------------------- */
+if (isset($_POST['registrar_pedido'])) {
+
+      $fechaR = $_POST['fechaRealizada_pedido'];
+      $fechaE = $_POST['fechaEspera_pedido'];
+      $proveedor = $_POST['proveedor_pedido'];
+      $estado = $_POST['estado_pedido'];
+      $codigo = $_POST['codigo_pedido'];
+      $detalle = $_POST['detalle_pedido'];
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+            redirigirRegistrarPedido($mensaje);
+      }
+
+
+      $newpedido = new PedidoDAO();
+      $insert = $newpedido->insertar(new PedidoDTO($codigo,$fechaR,$fechaE,$detalle,$estado,$proveedor));
+
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarPedido();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExistePedido();
+                        </script>";
+
+      }
+
+      redirigirRegistrarPedido($mensaje);
+
+}
+
+// $actualizar =  $newusuario ->actualizar(NEW EmpleadoDTO($IDENTIFICACION ,$tipo, $nombre,$apellido,$rol,$edad,$estado,$celular)); 
+
+/** --------------- REGISTRAR PROVEEDOR ---------------------------- */
+if (isset($_POST['registrar_proveedor'])) {
+
+      $nombre = $_POST['nombre_prov'];
+      $telefono = $_POST['telefono_prov'];
+      $direccion = $_POST['direccion_prov'];
+      $nit = $_POST['nit_prov'];
+      $asesor = $_POST['asesor_prov'];
+      $estado = $_POST['estado_prov'];
+
+      if ($estado == 'seleccionar') {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ErrorComboEstado();
+                        </script>";
+
+            redirigirRegistrarProveedor($mensaje);
+      }
+
+
+      $newprovedor = new ProveedorDAO();
+      $insert = $newprovedor->insertar(new ProveedorDTO($nombre, $telefono, $direccion, $nit, $asesor, $estado));
+
+
+      if ($insert === 1) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.AgregarProveedor();
+                        </script>";
+
+      }
+
+      if ($insert === 2) {
+            $mensaje = "<script>
+                        const instancia = new Mensajes();
+                        instancia.ExisteProveedor();
+                        </script>";
+
+      }
+
+      redirigirRegistrarProveedor($mensaje);
+
 }
 
 if (isset($_POST['eliminaremp'])) {
@@ -164,26 +307,61 @@ if (isset($_POST['eliminaremp'])) {
       redirigirEliminarEmpleado($mensaje);
 
 }
-  if (isset($_POST['valor'])) {
+if (isset($_POST['valor'])) {
       $valor = $_POST['valor'];
       $newusuario = new EmpleadoDAO();
       $eliminar = $newusuario->eliminar($valor);
-    
+
       $response = array('valor' => $eliminar);
-    
+
       header('Content-Type: application/json');
       echo json_encode($response);
       exit; // Terminar la ejecución del script aquí
-  }
-  
+}
 
 
 
+
+
+
+/**------------------------------------REDIRIGIR------------------------------------ */
+
+function redirigirUsuarioIncorrecto($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/");
+      $paginaPrincipal = '../view/index.php';
+      header("Location: $paginaPrincipal");
+      exit();
+}
 
 function redirigirRegistrarEmpleado($mensaje)
 {
       setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
       $paginaPrincipal = '../view/RegistrarEmpleadoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirRegistrarProveedor($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarProveedorVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirRegistrarPedido($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarPedidoVista.php'; // Cambia 'index.php' por la URL de tu página principal
+      header("Location: $paginaPrincipal");
+      exit();
+}
+
+function redirigirRegistrarProducto($mensaje)
+{
+      setcookie("mensaje", $mensaje, time() + 3600, "/"); // Establecer la cookie con el mensaje
+      $paginaPrincipal = '../view/RegistrarProductoVista.php'; // Cambia 'index.php' por la URL de tu página principal
       header("Location: $paginaPrincipal");
       exit();
 }

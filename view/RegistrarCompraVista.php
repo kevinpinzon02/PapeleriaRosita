@@ -39,7 +39,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <input class="form_campos" name="cantidad_compra" type="number" autocomplete="off" required>
 
                     Estado:
-                    <select class='form_campos' name='estado_compra' style="left: 600px">
+                    <select class='form_campos' name='estado_compra'>
                         <option value='seleccionar'>Seleccionar</option>
                         <option value='ACTIVO'>Activo</option>
                         <option value='INACTIVO'>Inactivo</option>
@@ -73,19 +73,48 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     $getTipoID2 = mysqli_query($conn,$getTipoID) or die(mysqli_error($conn));
 
                     foreach ($getTipoID2 as $opciones): ?>
-                        <option value ="<?php echo $opciones['id_usuario'] ?>"><?php echo $opciones['nombre'] ?></option>
+                    <option value ="<?php echo $opciones['id_usuario'] ?>"><?php echo $opciones['nombre'] ?></option>
                     <?php endforeach ?>
                     </select>
 
                 </div>
+
             </div>
-            <br><br>
+            
+    </form>
+    <div class="scroll-pane">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del producto</th>
+                    <th>Cantidad</th>
+                    <th>Seleccionar</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                // ... Código PHP para obtener los productos de la base de datos ...
+                $query = "SELECT id_producto, nombre_producto FROM producto";
+                $result = mysqli_query($conn, $query);
+                $productos = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+                foreach ($productos as $producto) {
+                    echo "<tr>";
+                    echo "<td>" . $producto['nombre_producto'] . "</td>";
+                    echo "<td><input type='number' name='cantidad_producto[]' value='0'></td>";
+                    echo "<td><input type='checkbox' name='seleccion_producto[]' value='" . $producto['id_producto'] . "'></td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+            </table>
+    </div>
+    <br><br>
             <div class = 'form_botones_usu'>
                 <input type='submit' name='registrar_compra' value='Registrar' class='form_boton_usu_izq'>
                 <input type='button' value='Volver' class='form_boton_usu_izq' 
                     onclick="window.location.href='MenuEmpleadoVista.php'">
                 </div>
-    </form>
     <?php
     
     if (isset($_COOKIE['mensaje'])) {

@@ -23,17 +23,17 @@ class EmpleadoDAO
 
   public function insertar($newempl)
   {
-
+    $numero = 0;
     $encontrar = $this->buscar($newempl->getIdentificacion());
     if ($encontrar === false) {
 
 
-    $sql = "INSERT INTO usuario values (?,?,?,?,?,?,?,?,?)";
+      $sql = "INSERT INTO usuario values (?,?,?,?,?,?,?,?,?)";
       $insert = $this->conexion->prepare($sql);
-      $data = array(0, $newempl->getIdentificacion(), $newempl->getTipo(), $newempl->getNombre(), $newempl->getApellido(), $newempl->getRol(), $newempl->getEdad(), $newempl->getEstado(),null);
+      $data = array(0, $newempl->getIdentificacion(), $newempl->getTipo(), $newempl->getNombre(), $newempl->getApellido(), $newempl->getRol(), $newempl->getEdad(), $newempl->getEstado(), null);
       if (($inse = $insert->execute($data)) === false) {
 
-        return 3;
+        $numero = 3;
       } else {
         $idinsert = $this->conexion->lastInsertId();
         $id2 = $idinsert;
@@ -43,55 +43,57 @@ class EmpleadoDAO
         $data2 = array($id2, $newempl->getTelefono());
 
 
-        return 1;
+        $numero = 1;
         if (($inse3 = $insert2->execute($data2)) === false) {
-          return 3;
+          $numero = 3;
         }
 
       }
 
     } else {
-      return 2;
+      $numero = 2;
     }
-
+    return $numero;
   }
 
 
-  public function identificar($ide , $contraseña)
+  public function identificar($ide, $contraseña)
   {
     try {
-      $consult = "SELECT * FROM usuario WHERE identificacion =$ide AND contrasenia = '$contraseña' ";
-    $result2 = $this->conexion->query($consult);
-    $ersut = $result2->fetchall(PDO::FETCH_ASSOC);
-    if (($ersut) != null) {
-      return true;
-    } else {
+
+      $consult = "SELECT * FROM usuario WHERE identificacion =$ide AND contrasenia ='$contraseña' ";
+
+      $result2 = $this->conexion->query($consult);
+      $ersut = $result2->fetchall(PDO::FETCH_ASSOC);
+      if (($ersut) != null) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (Exception $e) {
       return false;
     }
-    } catch (Exception $e) {
-      return  false;
-    }
-  
+
 
   }
 
   public function sacarid($ide)
-{
+  {
     try {
-        $consult = "SELECT id_usuario FROM usuario WHERE identificacion = :ide ";
-        $stmt = $this->conexion->prepare($consult);
-        $stmt->bindParam(':ide', $ide);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result !== false) {
-            return $result['id_usuario'];
-        } else {
-            return 0;
-        }
-    } catch (Exception $e) {
+      $consult = "SELECT id_usuario FROM usuario WHERE identificacion = :ide ";
+      $stmt = $this->conexion->prepare($consult);
+      $stmt->bindParam(':ide', $ide);
+      $stmt->execute();
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($result !== false) {
+        return $result['id_usuario'];
+      } else {
         return 0;
+      }
+    } catch (Exception $e) {
+      return 0;
     }
-}
+  }
 
 
   public function buscar(int $ide)
