@@ -92,27 +92,7 @@ function __construct() {
   }
 
     public function eliminar($ide) {
-      $encontrar = $this->buscar($ide);
-      $encontrar = $this->buscar($ide);
-
-      if($encontrar===true){
-      $eliminarproducto = "DELETE FROM producto WHERE nombre_producto = '$ide'";
-      $elim = $this->conexion->prepare($eliminarproducto);
-      $eli = $elim->execute();
-
-      if($eli = $elim->execute()===false){
-      echo "no se borro";
-      return 0;
-  }else {
-    echo "se borro";
-    return 1;
-
-  }
-}else{
-  echo "no se encontro el producto";
-  return 2;
-
-}
+     
 }
 
 public function actualizar($newproc) {

@@ -35,20 +35,14 @@ function __construct() {
       $newventa ->getDetalleVenta(),
       $newventa ->getEstado(),
       $newventa ->getUsuario(),
-      $newventa ->getCodigo());
-
-      $idinsert = $this->conexion->lastInsertId();
-      $id2 = $idinsert;
-      echo " este es el usuario: ".$newventa ->getUsuario();
-
-      
- 
-
+      $newventa ->getCodigo()); 
       if (($inse= $insert ->execute($data)) ===false){
           echo "no se logor insertar";
         return 3;
       }else{
-        //$this->actualizarPoructo($newventa ->getListaproductos(),$id2);
+        $idinsert = $this->conexion->lastInsertId();
+        $id2 = $idinsert;
+        $this->actualizarPoructo($newventa ->getListaproductos(),$id2);
       }
            
     }else {
@@ -58,23 +52,59 @@ function __construct() {
    
     }
   
-    public function actualizarPoructo($listaproductos,$codgio){
+    public function actualizarPoructo($listaproductos,$codigo){
      foreach ($listaproductos as $producto) {
-        echo "Nombre: " . $producto->getNombreProducto() . ", Edad: " . $producto->getCantidad() . "<br>";
-        $sql= "INSERT INTO venta_producto values (?,?,?)";
-        $insert=$this->conexion->prepare($sql);
-        $data= array($codgio,
-        $producto ->getCodigo(),
-        $producto ->getCantidad());
-  
-       
-        echo " este es el usuario: ". $producto ->getCodigo();
+      $id_producto = $producto['id_producto'];
+      $cantidad = $producto['cantidad'];
+      echo "Nombre: " . $id_producto. ", Edad: " . $codigo . "<br>";
+      $sql= "INSERT INTO venta_producto values (?,?,?)";
+      $insert=$this->conexion->prepare($sql);
+      $data= array($codigo,
+      $id_producto,
+      $cantidad);
+      if (!$insert->execute($data)) {
+          echo "Error al insertar en la tabla venta_producto.";
+          return; 
+        }else{
+          $venta=   $this->calcularSumaVenta($codigo);
+        }
     }
-
-
-
     } 
    
+
+    public function calcularSumaVenta($idVenta)
+{
+    $sql = "SELECT v.id_venta, SUM(p.valor_venta * vp.cantidad) AS valor_total
+            FROM venta_producto vp
+            JOIN producto p ON vp.id_producto = p.id_producto
+            JOIN venta v ON vp.id_venta = v.id_venta
+            WHERE v.id_venta = :idVenta";
+
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bindParam(':idVenta', $idVenta, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $valorTotal = $result['valor_total'];
+
+   
+      $sql = "UPDATE venta SET valor_venta = ? WHERE id_venta = ?";
+      $update = $this->conexion->prepare($sql);
+      $data = array($valorTotal,
+      $idVenta
+        
+      );
+  
+      if (($upd = $update->execute($data)) === false) {
+        echo "error";
+      } else {
+        echo "final feliz";
+      }
+    
+
+    return $valorTotal;
+}
 
 
 
@@ -91,50 +121,11 @@ function __construct() {
   }
 
     public function eliminar($ide) {
-      $encontrar = $this->buscar($ide);
-      $encontrar = $this->buscar($ide);
-
-      if($encontrar===true){
-      $eliminarproducto = "DELETE FROM producto WHERE nombre_producto = '$ide'";
-      $elim = $this->conexion->prepare($eliminarproducto);
-      $eli = $elim->execute();
-
-      if($eli = $elim->execute()===false){
-      echo "no se borro";
-      return 0;
-  }else {
-    echo "se borro";
-    return 1;
-
-  }
-}else{
-  echo "no se encontro el producto";
-  return 2;
-
-}
+     
 }
 
 public function actualizar($newproc) {
-  $sql = "UPDATE producto SET nombre_producto = ?, valor_compra = ?, valor_venta = ?, cantidad = ?, detalle_producto = ?, estado = ? WHERE codigo = ?";
-  $update = $this->conexion->prepare($sql);
   
-  $data= array($newproc ->getNombreProducto(), 
-  $newproc ->getValorCompra(),
-  $newproc ->getValorVenta(),
-  $newproc ->getCantidad(),
-  $newproc ->getDetalleProducto(),
-  $newproc ->getEstado(),
-  $newproc ->getCodigo());
-
-  echo  $sql;
-
-  if (($upd = $update->execute($data)) === false) {
-      echo "no se pudo actualizar";
-  }else{
-
-    echo "se actualizo";
-     
-  }
 
 }
 
