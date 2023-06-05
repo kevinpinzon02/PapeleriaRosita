@@ -1,4 +1,14 @@
 <?php
+/**
+ * Script para ver opciones de compra
+ * 
+ * Este script se encarga de mostrar el menu con todas las funciones de la compra
+ * 
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 ?>
 

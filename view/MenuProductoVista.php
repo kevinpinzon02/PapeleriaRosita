@@ -1,4 +1,14 @@
 <?php
+/**
+ * Script para ver opciones del producto
+ * 
+ * Este script se encarga de mostrar el menu con todas las funciones de los productos
+ * 
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 ?>
 

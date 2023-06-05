@@ -5,12 +5,32 @@ require_once('ConexionBD.php');
 
 //use model\EmpleadoDTO;
 
-
+/**
+ * Clase ProductoDAO
+ *
+ * Esta clase se encarga de realizar operaciones CRUD (Create, Read, Update, Delete) en la tabla "producto" de la base de datos.
+ */
 class ProductoDAO
 {
+  /**
+   * Objeto de conexión a la base de datos.
+   *
+   * @var PDO
+   */
   private $conexion;
+
+  /**
+   * Objeto ProductoDTO utilizado para acceder a los datos del producto.
+   *
+   * @var ProductoDTO
+   */
   private $prodcutodto;
 
+  /**
+   * Constructor de la clase ProductoDAO.
+   *
+   * Inicializa la conexión a la base de datos utilizando la clase Conexion y asigna el resultado a la variable $conexion.
+   */
   function __construct()
   {
 
@@ -18,6 +38,15 @@ class ProductoDAO
     $this->conexion = $this->conexion->connect();
 
   }
+   /**
+   * Inserta un nuevo producto en la tabla "producto".
+   *
+   * @param ProductoDTO $newproc Objeto ProductoDTO que contiene los datos del producto a insertar.
+   * @return int Retorna un número que indica el resultado de la operación:
+   *              - 0: Error al ejecutar la inserción.
+   *              - 1: Inserción exitosa.
+   *              - 2: El producto ya existe en la base de datos.
+   */
   public function insertar($newproc)
   {
     $numero = 0;
@@ -49,7 +78,12 @@ class ProductoDAO
   }
 
 
-
+/**
+   * Busca un producto en la tabla "producto" por su nombre.
+   *
+   * @param string $ide Nombre del producto a buscar.
+   * @return bool Retorna true si el producto se encuentra en la base de datos, de lo contrario, retorna false.
+   */
   public function buscar(String $ide)
   {
     $consult = "SELECT * FROM producto WHERE nombre_producto = '$ide'";
@@ -62,7 +96,15 @@ class ProductoDAO
     }
 
   }
-
+/**
+   * Elimina un producto de la tabla "producto" por su nombre.
+   *
+   * @param string $ide Nombre del producto a eliminar.
+   * @return int Retorna un número que indica el resultado de la operación:
+   *              - 0: Error al ejecutar la eliminación.
+   *              - 1: Eliminación exitosa.
+   *              - 2: El producto no existe en la base de datos.
+   */
   public function eliminar($ide)
   {
     $encontrar = $this->buscar($ide);
@@ -88,6 +130,12 @@ class ProductoDAO
     }
   }
 
+  /**
+   * Actualiza los datos de un producto en la tabla "producto".
+   *
+   * @param ProductoDTO $newproc Objeto ProductoDTO que contiene los nuevos datos del producto.
+   * @return void
+   */
   public function actualizar($newproc)
   {
     $sql = "UPDATE producto SET nombre_producto = ?, valor_compra = ?, valor_venta = ?, cantidad = ?, detalle_producto = ?, estado = ? WHERE codigo = ?";
@@ -115,17 +163,6 @@ class ProductoDAO
 
   }
 
-
-
-  public function getEmpleadodto()
-  {
-    return $this->empleadodto;
-  }
-
-  public function setEmpleadodto($empleadodto)
-  {
-    $this->empleadodto = $empleadodto;
-  }
 
 
 }

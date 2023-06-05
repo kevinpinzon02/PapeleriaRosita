@@ -1,4 +1,14 @@
 <?php
+/**
+ * Script para ver opciones de empleado
+ * 
+ * Este script se encarga de mostrar el menu con todas las funciones del empleado
+ * 
+ * 
+ * @version 1.0
+ * @author MonkeyMind
+ * @last_modified Fecha de última modificación
+ */
 session_start();
 ?>
 
