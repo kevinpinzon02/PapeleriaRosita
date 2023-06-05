@@ -15,12 +15,10 @@ function __construct() {
      $this->conexion =new Conexion();
      $this->conexion  =  $this->conexion ->connect();
     
-
   }
-
-
    public function insertar($newproc)
   {
+    $numero = 0;
 
     $encontrar = $this->buscar($newproc ->getNombreProducto());
     if($encontrar===false){
@@ -34,16 +32,17 @@ function __construct() {
       $newproc ->getCantidad(),
       $newproc ->getDetalleProducto(),
       $newproc ->getEstado(),
-      $newproc ->getCodigo());
+      $newproc ->getCodigo()
+    );
+      $numero = 1;
       if (($inse= $insert ->execute($data)) ===false){
           
-        return 3;
-      }else {
-        echo "no se pudo";
+        $numero = 0;
       }
-
+    }else{
+      $numero=2;
     }
-    
+    return $numero;
     }
 
 
