@@ -137,14 +137,7 @@ if (isset($_POST['registrar_venta'])) {
       $productosArray[] = $producto;
   }
 
-      if ($proveedor == 'seleccionar') {
-            $mensaje = "<script>
-                        const instancia = new Mensajes();
-                        instancia.ErrorComboRol();
-                        </script>";
-
-                        redirigirRegistrarVenta($mensaje);
-      }
+    
 
       if ($estado == 'seleccionar') {
             $mensaje = "<script>
